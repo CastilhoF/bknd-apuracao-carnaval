@@ -1,6 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from './core/app/app.module';
 import { TransformInterceptor } from './core/common/interceptors/transform.interceptor';
 import { Logger } from '@nestjs/common';
 
