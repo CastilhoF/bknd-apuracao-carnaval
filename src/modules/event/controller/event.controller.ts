@@ -43,6 +43,12 @@ export class EventController {
     return this.eventService.findAllEvents();
   }
 
+  @Get(':id')
+  findOneEvent(@Param('id') id: string, @GetUser() user: User): Promise<Event> {
+    this.logger.verbose(`User "${user.username}" find one event id: ${id}`);
+    return this.eventService.findOneEvent(id);
+  }
+
   @Patch(':id')
   updateEvent(
     @GetUser() user: User,
