@@ -52,4 +52,10 @@ export class EventController {
     this.logger.verbose(`User "${user.username}" update event id: ${id}`);
     return this.eventService.updateEvent(id, createEventDto);
   }
+
+  @Delete(':id')
+  deleteEvent(@GetUser() user: User, @Param('id') id: string): Promise<void> {
+    this.logger.verbose(`User "${user.username}" delete event id: ${id}`);
+    return this.eventService.deleteEvent(id);
+  }
 }
