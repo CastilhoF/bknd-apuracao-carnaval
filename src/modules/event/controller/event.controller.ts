@@ -36,4 +36,10 @@ export class EventController {
     );
     return this.eventService.createEvent(createEventDto);
   }
+
+  @Get()
+  findAllEvents(@GetUser() user: User): Promise<Event[]> {
+    this.logger.verbose(`User "${user.username}" find all events.`);
+    return this.eventService.findAllEvents();
+  }
 }
