@@ -4,6 +4,7 @@ import { CreateEventDto } from '../../modules/event/dtos/create.event.dto';
 import {
   ConflictException,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { FormatDateAndTime } from 'src/utils/format.date';
 
@@ -29,5 +30,9 @@ export class EventRepository extends Repository<Event> {
         throw new InternalServerErrorException();
       }
     }
+  }
+
+  async findAllEvents(): Promise<Event[]> {
+    return await this.find();
   }
 }
