@@ -58,9 +58,9 @@ export class GroupController {
     return this.groupService.updateGroup(id, createGroupDto);
   }
 
-  // @Delete(':id')
-  // deleteGroup(@GetUser() user: User, @Param('id') id: string): Promise<void> {
-  //   this.logger.verbose(`User "${user.username}" delete group id: ${id}`);
-  //   return this.groupService.deleteGroup(id);
-  // }
+  @Delete(':id')
+  deleteGroup(@GetUser() user: User, @Param('id') id: string): Promise<void> {
+    this.logger.verbose(`User "${user.username}" delete group id: ${id}`);
+    return this.groupService.deleteGroup(id);
+  }
 }
