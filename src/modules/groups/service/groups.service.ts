@@ -45,11 +45,11 @@ export class GroupService {
     return this.groupRepository.updateGroup(id, createGroupDto);
   }
 
-  // async deleteGroup(id: string): Promise<void> {
-  //   const group = await this.groupRepository.findOneGroup(id);
-  //   if (!group) {
-  //     throw new NotFoundException(`Group with ID "${id}" not found`);
-  //   }
-  //   await this.groupRepository.delete(id);
-  // }
+  async deleteGroup(id: string): Promise<void> {
+    const group = await this.groupRepository.findOneGroup(id);
+    if (!group) {
+      throw new NotFoundException(`Group with ID "${id}" not found`);
+    }
+    await this.groupRepository.delete(id);
+  }
 }
