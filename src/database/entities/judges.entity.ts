@@ -15,10 +15,4 @@ export class Judges {
 
   @Column()
   updatedAt: Date;
-
-  @ManyToOne((_type) => Questions, (questions) => questions.judges, {
-    eager: false,
-  })
-  @Exclude({ toPlainOnly: true })
-  questions: Questions[];
 }
