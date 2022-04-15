@@ -22,14 +22,4 @@ export class Schools {
 
   @Column()
   updatedAt: Date;
-
-  @ManyToOne((_type) => Group, (group) => group.schools, { eager: false })
-  @Exclude({ toPlainOnly: true })
-  group: Group;
-
-  @OneToMany((_type) => Questions, (questions) => questions.school, {
-    eager: false,
-  })
-  @Exclude({ toPlainOnly: true })
-  questions: Questions[];
 }

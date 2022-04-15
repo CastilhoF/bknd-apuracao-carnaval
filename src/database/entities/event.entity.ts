@@ -13,11 +13,8 @@ export class Event {
   location: string;
 
   @Column()
-  createdAt: Date;
+  createdAt: string;
 
   @Column()
-  updatedAt: Date;
-
-  @OneToMany((_type) => Group, (group) => group.event, { eager: false })
-  group: Group[];
+  updatedAt: string;
 }
