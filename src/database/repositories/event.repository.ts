@@ -67,4 +67,15 @@ export class EventRepository extends Repository<Event> {
 
     return await this.save(event);
   }
+
+  async deleteEvent(id: string): Promise<void> {
+    const event = await this.findOne(id);
+
+    if (!event) {
+      this.logger.error(`Event id "${id}" not found.`);
+      throw new NotFoundException(`Event with ID "${id}" not found`);
+    }
+
+    await this.delete(event);
+  }
 }
