@@ -42,4 +42,14 @@ export class EventController {
     this.logger.verbose(`User "${user.username}" find all events.`);
     return this.eventService.findAllEvents();
   }
+
+  @Patch(':id')
+  updateEvent(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body() createEventDto: CreateEventDto,
+  ): Promise<Event> {
+    this.logger.verbose(`User "${user.username}" update event id: ${id}`);
+    return this.eventService.updateEvent(id, createEventDto);
+  }
 }
