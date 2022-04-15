@@ -53,34 +53,34 @@ export class GroupRepository extends Repository<Group> {
     }
   }
 
-  // async updateGroup(
-  //   id: string,
-  //   createGroupDto: CreateGroupDto,
-  // ): Promise<Group> {
-  //   const { name, event_id } = createGroupDto;
+  async updateGroup(
+    id: string,
+    createGroupDto: CreateGroupDto,
+  ): Promise<Group> {
+    const { name, event_id } = createGroupDto;
 
-  //   const date = new Date();
+    const date = new Date();
 
-  //   const updatedAt = FormatDateAndTime(date);
+    const updatedAt = FormatDateAndTime(date);
 
-  //   if (!id) {
-  //     this.logger.error(`Group id "${id}" not found.`);
-  //     throw new NotFoundException(`Group with ID "${id}" not found`);
-  //   }
+    if (!id) {
+      this.logger.error(`Group id "${id}" not found.`);
+      throw new NotFoundException(`Group with ID "${id}" not found`);
+    }
 
-  //   const group = await this.findOne(id);
+    const group = await this.findOne(id);
 
-  //   if (!group) {
-  //     this.logger.error(`Group id "${id}" not found.`);
-  //     throw new NotFoundException(`Group with ID "${id}" not found`);
-  //   }
+    if (!group) {
+      this.logger.error(`Group id "${id}" not found.`);
+      throw new NotFoundException(`Group with ID "${id}" not found`);
+    }
 
-  //   group.name = name;
-  //   group.event_id = event_id;
-  //   group.updatedAt = updatedAt;
+    group.name = name;
+    group.event_id = event_id;
+    group.updatedAt = updatedAt;
 
-  //   return await this.save(group);
-  // }
+    return await this.save(group);
+  }
 
   // async deleteGroup(id: string): Promise<void> {
   //   const group = await this.findOne(id);
