@@ -15,4 +15,8 @@ export class EventService {
   async createEvent(createEventDto: CreateEventDto): Promise<Event> {
     return this.eventRepository.createEvent(createEventDto);
   }
+
+  async findAllEvents(): Promise<Event[]> {
+    return this.eventRepository.findAllEvents();
+  }
 }
