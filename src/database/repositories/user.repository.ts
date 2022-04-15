@@ -6,6 +6,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { FormatDateAndTime } from 'src/utils/format.date';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -16,7 +17,17 @@ export class UserRepository extends Repository<User> {
 
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const user = this.create({ username, password: hashedPassword });
+    const date = new Date();
+
+    const createdAt = FormatDateAndTime(date);
+    const updatedAt = FormatDateAndTime(date);
+
+    const user = this.create({
+      username,
+      password: hashedPassword,
+      createdAt,
+      updatedAt,
+    });
 
     try {
       await this.save(user);
