@@ -19,4 +19,11 @@ export class EventService {
   async findAllEvents(): Promise<Event[]> {
     return this.eventRepository.findAllEvents();
   }
+
+  async updateEvent(
+    id: string,
+    createEventDto: CreateEventDto,
+  ): Promise<Event> {
+    return this.eventRepository.updateEvent(id, createEventDto);
+  }
 }
