@@ -82,14 +82,14 @@ export class GroupRepository extends Repository<Group> {
     return await this.save(group);
   }
 
-  // async deleteGroup(id: string): Promise<void> {
-  //   const group = await this.findOne(id);
+  async deleteGroup(id: string): Promise<void> {
+    const group = await this.findOne(id);
 
-  //   if (!group) {
-  //     this.logger.error(`Group id "${id}" not found.`);
-  //     throw new NotFoundException(`Group with ID "${id}" not found`);
-  //   }
+    if (!group) {
+      this.logger.error(`Group id "${id}" not found.`);
+      throw new NotFoundException(`Group with ID "${id}" not found`);
+    }
 
-  //   await this.delete(group);
-  // }
+    await this.delete(group);
+  }
 }
