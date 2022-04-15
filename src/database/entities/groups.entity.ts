@@ -1,13 +1,4 @@
-import { Exclude } from 'class-transformer';
-import { Event } from './event.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Schools } from './schools.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Group {
@@ -18,8 +9,11 @@ export class Group {
   name: string;
 
   @Column()
-  createdAt: Date;
+  event_id: string;
 
   @Column()
-  updatedAt: Date;
+  createdAt: string;
+
+  @Column()
+  updatedAt: string;
 }
