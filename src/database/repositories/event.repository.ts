@@ -39,6 +39,20 @@ export class EventRepository extends Repository<Event> {
     return await this.find();
   }
 
+  async findOneEvent(id: string): Promise<Event> {
+    try {
+      const found = await this.findOne(id);
+      if (!found) {
+        this.logger.error(`Event id "${id}" not found.`);
+        throw new NotFoundException(`Event with ID "${id}" not found`);
+      }
+      return found;
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
+
   async updateEvent(
     id: string,
     createEventDto: CreateEventDto,

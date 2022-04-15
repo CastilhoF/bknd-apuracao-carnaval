@@ -20,6 +20,14 @@ export class EventService {
     return this.eventRepository.findAllEvents();
   }
 
+  async findOneEvent(id: string): Promise<Event> {
+    const found = await this.eventRepository.findOne(id);
+    if (!found) {
+      throw new NotFoundException(`Event with ID "${id}" not found`);
+    }
+    return found;
+  }
+
   async updateEvent(
     id: string,
     createEventDto: CreateEventDto,
