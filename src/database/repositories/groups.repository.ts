@@ -35,23 +35,23 @@ export class GroupRepository extends Repository<Group> {
     }
   }
 
-  // async findAllGroups(): Promise<Group[]> {
-  //   return await this.find();
-  // }
+  async findAllGroups(): Promise<Group[]> {
+    return await this.find();
+  }
 
-  // async findOneGroup(id: string): Promise<Group> {
-  //   try {
-  //     const found = await this.findOne(id);
-  //     if (!found) {
-  //       this.logger.error(`Group id "${id}" not found.`);
-  //       throw new NotFoundException(`Group with ID "${id}" not found`);
-  //     }
-  //     return found;
-  //   } catch (error) {
-  //     this.logger.error(error);
-  //     throw new InternalServerErrorException();
-  //   }
-  // }
+  async findOneGroup(id: string): Promise<Group> {
+    try {
+      const found = await this.findOne(id);
+      if (!found) {
+        this.logger.error(`Group id "${id}" not found.`);
+        throw new NotFoundException(`Group with ID "${id}" not found`);
+      }
+      return found;
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
 
   // async updateGroup(
   //   id: string,
