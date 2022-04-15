@@ -26,17 +26,17 @@ export class GroupService {
     return this.groupRepository.createGroup(createGroupDto);
   }
 
-  // async findAllGroups(): Promise<Group[]> {
-  //   return this.groupRepository.findAllGroups();
-  // }
+  async findAllGroups(): Promise<Group[]> {
+    return this.groupRepository.findAllGroups();
+  }
 
-  // async findOneGroup(id: string): Promise<Group> {
-  //   const found = await this.groupRepository.findOneGroup(id);
-  //   if (!found) {
-  //     throw new NotFoundException(`Group with ID "${id}" not found`);
-  //   }
-  //   return found;
-  // }
+  async findOneGroup(id: string): Promise<Group> {
+    const found = await this.groupRepository.findOneGroup(id);
+    if (!found) {
+      throw new NotFoundException(`Group with ID "${id}" not found`);
+    }
+    return found;
+  }
 
   // async updateGroup(
   //   id: string,
