@@ -36,17 +36,17 @@ export class GroupController {
     return this.groupService.createGroup(createGroupDto);
   }
 
-  // @Get()
-  // findAllGroups(@GetUser() user: User): Promise<Group[]> {
-  //   this.logger.verbose(`User "${user.username}" find all groups.`);
-  //   return this.groupService.findAllGroups();
-  // }
+  @Get()
+  findAllGroups(@GetUser() user: User): Promise<Group[]> {
+    this.logger.verbose(`User "${user.username}" find all groups.`);
+    return this.groupService.findAllGroups();
+  }
 
-  // @Get(':id')
-  // findOneGroup(@Param('id') id: string, @GetUser() user: User): Promise<Group> {
-  //   this.logger.verbose(`User "${user.username}" find one group id: ${id}`);
-  //   return this.groupService.findOneGroup(id);
-  // }
+  @Get(':id')
+  findOneGroup(@Param('id') id: string, @GetUser() user: User): Promise<Group> {
+    this.logger.verbose(`User "${user.username}" find one group id: ${id}`);
+    return this.groupService.findOneGroup(id);
+  }
 
   // @Patch(':id')
   // updateGroup(
