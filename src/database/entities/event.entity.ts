@@ -17,7 +17,4 @@ export class Event {
 
   @Column()
   updatedAt: Date;
-
-  @OneToMany((_type) => Group, (group) => group.event, { eager: false })
-  group: Group[];
 }
