@@ -38,12 +38,12 @@ export class GroupService {
     return found;
   }
 
-  // async updateGroup(
-  //   id: string,
-  //   createGroupDto: CreateGroupDto,
-  // ): Promise<Group> {
-  //   return this.groupRepository.updateGroup(id, createGroupDto);
-  // }
+  async updateGroup(
+    id: string,
+    createGroupDto: CreateGroupDto,
+  ): Promise<Group> {
+    return this.groupRepository.updateGroup(id, createGroupDto);
+  }
 
   // async deleteGroup(id: string): Promise<void> {
   //   const group = await this.groupRepository.findOneGroup(id);
