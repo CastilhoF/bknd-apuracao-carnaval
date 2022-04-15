@@ -48,15 +48,15 @@ export class GroupController {
     return this.groupService.findOneGroup(id);
   }
 
-  // @Patch(':id')
-  // updateGroup(
-  //   @GetUser() user: User,
-  //   @Param('id') id: string,
-  //   @Body() createGroupDto: CreateGroupDto,
-  // ): Promise<Group> {
-  //   this.logger.verbose(`User "${user.username}" update group id: ${id}`);
-  //   return this.groupService.updateGroup(id, createGroupDto);
-  // }
+  @Patch(':id')
+  updateGroup(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body() createGroupDto: CreateGroupDto,
+  ): Promise<Group> {
+    this.logger.verbose(`User "${user.username}" update group id: ${id}`);
+    return this.groupService.updateGroup(id, createGroupDto);
+  }
 
   // @Delete(':id')
   // deleteGroup(@GetUser() user: User, @Param('id') id: string): Promise<void> {
