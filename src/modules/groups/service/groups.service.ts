@@ -25,4 +25,31 @@ export class GroupService {
     }
     return this.groupRepository.createGroup(createGroupDto);
   }
+
+  // async findAllGroups(): Promise<Group[]> {
+  //   return this.groupRepository.findAllGroups();
+  // }
+
+  // async findOneGroup(id: string): Promise<Group> {
+  //   const found = await this.groupRepository.findOneGroup(id);
+  //   if (!found) {
+  //     throw new NotFoundException(`Group with ID "${id}" not found`);
+  //   }
+  //   return found;
+  // }
+
+  // async updateGroup(
+  //   id: string,
+  //   createGroupDto: CreateGroupDto,
+  // ): Promise<Group> {
+  //   return this.groupRepository.updateGroup(id, createGroupDto);
+  // }
+
+  // async deleteGroup(id: string): Promise<void> {
+  //   const group = await this.groupRepository.findOneGroup(id);
+  //   if (!group) {
+  //     throw new NotFoundException(`Group with ID "${id}" not found`);
+  //   }
+  //   await this.groupRepository.delete(id);
+  // }
 }
