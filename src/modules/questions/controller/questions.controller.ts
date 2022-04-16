@@ -51,15 +51,15 @@ export class QuestionsController {
     return this.questionsService.findOneQuestion(id);
   }
 
-  // @Patch(':id')
-  // updateQuestion(
-  //   @GetUser() user: User,
-  //   @Param('id') id: string,
-  //   @Body() createQuestionDto: CreateQuestionDto,
-  // ): Promise<Questions> {
-  //   this.logger.verbose(`User "${user.username}" update question id: ${id}`);
-  //   return this.questionsService.updateQuestion(id, createQuestionDto);
-  // }
+  @Patch(':id')
+  updateQuestion(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body() createQuestionDto: CreateQuestionDto,
+  ): Promise<Questions> {
+    this.logger.verbose(`User "${user.username}" update question id: ${id}`);
+    return this.questionsService.updateQuestion(id, createQuestionDto);
+  }
 
   // @Delete(':id')
   // deleteQuestion(
