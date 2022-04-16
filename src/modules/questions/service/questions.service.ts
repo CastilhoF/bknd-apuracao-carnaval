@@ -92,11 +92,11 @@ export class QuestionsService {
     return this.questionsRepository.updateQuestion(id, createQuestionDto);
   }
 
-  // async deleteQuestion(id: string): Promise<void> {
-  //   const question = await this.questionsRepository.findOneQuestion(id);
-  //   if (!question) {
-  //     throw new NotFoundException(`Question with ID "${id}" not found`);
-  //   }
-  //   return this.questionsRepository.deleteQuestion(id);
-  // }
+  async deleteQuestion(id: string): Promise<void> {
+    const question = await this.questionsRepository.findOneQuestion(id);
+    if (!question) {
+      throw new NotFoundException(`Question with ID "${id}" not found`);
+    }
+    return this.questionsRepository.deleteQuestion(id);
+  }
 }
