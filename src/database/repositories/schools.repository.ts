@@ -53,34 +53,34 @@ export class SchoolsRepository extends Repository<Schools> {
     }
   }
 
-  // async updateSchools(
-  //   id: string,
-  //   createSchoolsDto: CreateSchoolsDto,
-  // ): Promise<Schools> {
-  //   const { name, group_id } = createSchoolsDto;
+  async updateSchools(
+    id: string,
+    createSchoolsDto: CreateSchoolsDto,
+  ): Promise<Schools> {
+    const { name, group_id } = createSchoolsDto;
 
-  //   const date = new Date();
+    const date = new Date();
 
-  //   const updatedAt = FormatDateAndTime(date);
+    const updatedAt = FormatDateAndTime(date);
 
-  //   if (!id) {
-  //     this.logger.error(`Schools id "${id}" not found.`);
-  //     throw new NotFoundException(`Schools with ID "${id}" not found`);
-  //   }
+    if (!id) {
+      this.logger.error(`Schools id "${id}" not found.`);
+      throw new NotFoundException(`Schools with ID "${id}" not found`);
+    }
 
-  //   const schools = this.create({ name, group_id, updatedAt });
+    const schools = this.create({ name, group_id, updatedAt });
 
-  //   if (!schools) {
-  //     this.logger.error(`Schools id "${id}" not found.`);
-  //     throw new NotFoundException(`Schools with ID "${id}" not found`);
-  //   }
+    if (!schools) {
+      this.logger.error(`Schools id "${id}" not found.`);
+      throw new NotFoundException(`Schools with ID "${id}" not found`);
+    }
 
-  //   schools.name = name;
-  //   schools.group_id = group_id;
-  //   schools.updatedAt = updatedAt;
+    schools.name = name;
+    schools.group_id = group_id;
+    schools.updatedAt = updatedAt;
 
-  //   return await this.save(schools);
-  // }
+    return await this.save(schools);
+  }
 
   // async deleteSchools(id: string): Promise<void> {
   //   const schools = await this.findOne(id);
