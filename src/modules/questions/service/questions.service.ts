@@ -85,12 +85,12 @@ export class QuestionsService {
     }
   }
 
-  // async updateQuestion(
-  //   id: string,
-  //   createQuestionDto: CreateQuestionDto,
-  // ): Promise<Questions> {
-  //   return this.questionsRepository.updateQuestion(id, createQuestionDto);
-  // }
+  async updateQuestion(
+    id: string,
+    createQuestionDto: CreateQuestionDto,
+  ): Promise<Questions> {
+    return this.questionsRepository.updateQuestion(id, createQuestionDto);
+  }
 
   // async deleteQuestion(id: string): Promise<void> {
   //   const question = await this.questionsRepository.findOneQuestion(id);
