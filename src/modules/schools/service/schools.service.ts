@@ -45,11 +45,11 @@ export class SchoolsService {
     return this.schoolsRepository.updateSchools(id, createSchoolsDto);
   }
 
-  // async deleteSchools(id: string): Promise<void> {
-  //   const schools = await this.schoolsRepository.findOneSchools(id);
-  //   if (!schools) {
-  //     throw new NotFoundException(`Schools with ID "${id}" not found`);
-  //   }
-  //   await this.schoolsRepository.delete(id);
-  // }
+  async deleteSchools(id: string): Promise<void> {
+    const schools = await this.schoolsRepository.findOneSchools(id);
+    if (!schools) {
+      throw new NotFoundException(`Schools with ID "${id}" not found`);
+    }
+    await this.schoolsRepository.delete(id);
+  }
 }
