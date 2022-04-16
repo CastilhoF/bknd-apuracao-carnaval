@@ -45,11 +45,11 @@ export class JudgesService {
     return this.judgesRepository.updateJudges(id, createJudgesDto);
   }
 
-  // async deleteJudges(id: string): Promise<void> {
-  //   const judges = await this.judgesRepository.findOneJudges(id);
-  //   if (!judges) {
-  //     throw new NotFoundException(`Judges with ID "${id}" not found`);
-  //   }
-  //   await this.judgesRepository.delete(id);
-  // }
+  async deleteJudges(id: string): Promise<void> {
+    const judges = await this.judgesRepository.findOneJudges(id);
+    if (!judges) {
+      throw new NotFoundException(`Judges with ID "${id}" not found`);
+    }
+    await this.judgesRepository.delete(id);
+  }
 }
