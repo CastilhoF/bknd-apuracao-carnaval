@@ -7,6 +7,7 @@ import { TypeOrmConfig } from '../config/database/typeorm.config';
 import { EventModule } from 'src/modules/event/module/event.module';
 import { GroupModule } from 'src/modules/groups/module/groups.module';
 import { SchoolsModule } from 'src/modules/schools/module/schools.module';
+import { JudgesModule } from 'src/modules/judges/module/judges.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SchoolsModule } from 'src/modules/schools/module/schools.module';
     EventModule,
     GroupModule,
     SchoolsModule,
+    JudgesModule,
   ],
 })
 export class AppModule {}
