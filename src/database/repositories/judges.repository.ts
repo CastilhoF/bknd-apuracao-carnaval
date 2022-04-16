@@ -53,34 +53,34 @@ export class JudgesRepository extends Repository<Judges> {
     }
   }
 
-  // async updateJudges(
-  //   id: string,
-  //   createJudgesDto: CreateJudgesDto,
-  // ): Promise<Judges> {
-  //   const { name, question_id } = createJudgesDto;
+  async updateJudges(
+    id: string,
+    createJudgesDto: CreateJudgesDto,
+  ): Promise<Judges> {
+    const { name, question_id } = createJudgesDto;
 
-  //   const date = new Date();
+    const date = new Date();
 
-  //   const updatedAt = FormatDateAndTime(date);
+    const updatedAt = FormatDateAndTime(date);
 
-  //   if (!id) {
-  //     this.logger.error(`Judges id "${id}" not found.`);
-  //     throw new NotFoundException(`Judges with ID "${id}" not found`);
-  //   }
+    if (!id) {
+      this.logger.error(`Judges id "${id}" not found.`);
+      throw new NotFoundException(`Judges with ID "${id}" not found`);
+    }
 
-  //   const judges = await this.findOne(id);
+    const judges = await this.findOne(id);
 
-  //   if (!judges) {
-  //     this.logger.error(`Judges id "${id}" not found.`);
-  //     throw new NotFoundException(`Judges with ID "${id}" not found`);
-  //   }
+    if (!judges) {
+      this.logger.error(`Judges id "${id}" not found.`);
+      throw new NotFoundException(`Judges with ID "${id}" not found`);
+    }
 
-  //   judges.name = name;
-  //   judges.question_id = question_id;
-  //   judges.updatedAt = updatedAt;
+    judges.name = name;
+    judges.question_id = question_id;
+    judges.updatedAt = updatedAt;
 
-  //   return await this.save(judges);
-  // }
+    return await this.save(judges);
+  }
 
   // async deleteJudges(id: string): Promise<Judges> {
   //   const judges = await this.findOne(id);
