@@ -15,7 +15,7 @@ export class Questions {
   judge_two_id: string;
 
   @Column()
-  judge_tree_id: string;
+  judge_three_id: string;
 
   @Column()
   judge_four_id: string;
