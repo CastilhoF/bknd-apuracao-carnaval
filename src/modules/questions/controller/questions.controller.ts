@@ -36,20 +36,20 @@ export class QuestionsController {
     return this.questionsService.createQuestions(createQuestionDto);
   }
 
-  // @Get()
-  // findAllQuestions(@GetUser() user: User): Promise<Questions[]> {
-  //   this.logger.verbose(`User "${user.username}" find all questions.`);
-  //   return this.questionsService.findAllQuestions();
-  // }
+  @Get()
+  findAllQuestions(@GetUser() user: User): Promise<Questions[]> {
+    this.logger.verbose(`User "${user.username}" find all questions.`);
+    return this.questionsService.findAllQuestions();
+  }
 
-  // @Get(':id')
-  // findOneQuestion(
-  //   @Param('id') id: string,
-  //   @GetUser() user: User,
-  // ): Promise<Questions> {
-  //   this.logger.verbose(`User "${user.username}" find one question id: ${id}`);
-  //   return this.questionsService.findOneQuestion(id);
-  // }
+  @Get(':id')
+  findOneQuestion(
+    @Param('id') id: string,
+    @GetUser() user: User,
+  ): Promise<Questions> {
+    this.logger.verbose(`User "${user.username}" find one question id: ${id}`);
+    return this.questionsService.findOneQuestion(id);
+  }
 
   // @Patch(':id')
   // updateQuestion(
