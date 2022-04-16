@@ -61,12 +61,12 @@ export class QuestionsController {
     return this.questionsService.updateQuestion(id, createQuestionDto);
   }
 
-  // @Delete(':id')
-  // deleteQuestion(
-  //   @Param('id') id: string,
-  //   @GetUser() user: User,
-  // ): Promise<void> {
-  //   this.logger.verbose(`User "${user.username}" delete question id: ${id}`);
-  //   return this.questionsService.deleteQuestion(id);
-  // }
+  @Delete(':id')
+  deleteQuestion(
+    @Param('id') id: string,
+    @GetUser() user: User,
+  ): Promise<void> {
+    this.logger.verbose(`User "${user.username}" delete question id: ${id}`);
+    return this.questionsService.deleteQuestion(id);
+  }
 }
