@@ -38,12 +38,12 @@ export class JudgesService {
     return found;
   }
 
-  // async updateJudges(
-  //   id: string,
-  //   createJudgesDto: CreateJudgesDto,
-  // ): Promise<Judges> {
-  //   return this.judgesRepository.updateJudges(id, createJudgesDto);
-  // }
+  async updateJudges(
+    id: string,
+    createJudgesDto: CreateJudgesDto,
+  ): Promise<Judges> {
+    return this.judgesRepository.updateJudges(id, createJudgesDto);
+  }
 
   // async deleteJudges(id: string): Promise<void> {
   //   const judges = await this.judgesRepository.findOneJudges(id);
