@@ -51,15 +51,15 @@ export class JudgesController {
     return this.judgesService.findOneJudges(id);
   }
 
-  // @Patch(':id')
-  // updateJudges(
-  //   @GetUser() user: User,
-  //   @Param('id') id: string,
-  //   @Body() createJudgesDto: CreateJudgesDto,
-  // ): Promise<Judges> {
-  //   this.logger.verbose(`User "${user.username}" update judges id: ${id}`);
-  //   return this.judgesService.updateJudges(id, createJudgesDto);
-  // }
+  @Patch(':id')
+  updateJudges(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body() createJudgesDto: CreateJudgesDto,
+  ): Promise<Judges> {
+    this.logger.verbose(`User "${user.username}" update judges id: ${id}`);
+    return this.judgesService.updateJudges(id, createJudgesDto);
+  }
 
   // @Delete(':id')
   // deleteJudges(@Param('id') id: string, @GetUser() user: User): Promise<void> {
