@@ -61,9 +61,9 @@ export class SchoolsController {
     return this.schoolsService.updateSchools(id, createSchoolsDto);
   }
 
-  // @Delete(':id')
-  // deleteSchools(@Param('id') id: string, @GetUser() user: User): Promise<void> {
-  //   this.logger.verbose(`User "${user.username}" delete schools id: ${id}`);
-  //   return this.schoolsService.deleteSchools(id);
-  // }
+  @Delete(':id')
+  deleteSchools(@Param('id') id: string, @GetUser() user: User): Promise<void> {
+    this.logger.verbose(`User "${user.username}" delete schools id: ${id}`);
+    return this.schoolsService.deleteSchools(id);
+  }
 }
