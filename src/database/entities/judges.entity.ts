@@ -1,6 +1,4 @@
-import { Exclude } from 'class-transformer';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Questions } from './questions.entity';
 
 @Entity()
 export class Judges {
@@ -11,8 +9,11 @@ export class Judges {
   name: string;
 
   @Column()
-  createdAt: Date;
+  question_id: string;
 
   @Column()
-  updatedAt: Date;
+  createdAt: string;
+
+  @Column()
+  updatedAt: string;
 }
