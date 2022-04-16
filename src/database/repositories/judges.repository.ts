@@ -35,23 +35,23 @@ export class JudgesRepository extends Repository<Judges> {
     }
   }
 
-  // async findAllJudges(): Promise<Judges[]> {
-  //   return await this.find();
-  // }
+  async findAllJudges(): Promise<Judges[]> {
+    return await this.find();
+  }
 
-  // async findOneJudges(id: string): Promise<Judges> {
-  //   try {
-  //     const found = await this.findOne(id);
-  //     if (!found) {
-  //       this.logger.error(`Judges id "${id}" not found.`);
-  //       throw new NotFoundException(`Judges with ID "${id}" not found`);
-  //     }
-  //     return found;
-  //   } catch (error) {
-  //     this.logger.error(error);
-  //     throw new InternalServerErrorException();
-  //   }
-  // }
+  async findOneJudges(id: string): Promise<Judges> {
+    try {
+      const found = await this.findOne(id);
+      if (!found) {
+        this.logger.error(`Judges id "${id}" not found.`);
+        throw new NotFoundException(`Judges with ID "${id}" not found`);
+      }
+      return found;
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
 
   // async updateJudges(
   //   id: string,
