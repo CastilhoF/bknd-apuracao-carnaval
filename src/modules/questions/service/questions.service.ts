@@ -69,21 +69,21 @@ export class QuestionsService {
     return this.questionsRepository.createQuestions(createQuestionDto);
   }
 
-  // async findAllQuestions(): Promise<Questions[]> {
-  //   return await this.questionsRepository.findAllQuestions();
-  // }
+  async findAllQuestions(): Promise<Questions[]> {
+    return await this.questionsRepository.findAllQuestions();
+  }
 
-  // async findOneQuestion(id: string): Promise<Questions> {
-  //   try {
-  //     const found = await this.questionsRepository.findOneQuestion(id);
-  //     if (!found) {
-  //       throw new NotFoundException(`Question with ID "${id}" not found`);
-  //     }
-  //     return found;
-  //   } catch (error) {
-  //     throw new NotFoundException(`Question with ID "${id}" not found`);
-  //   }
-  // }
+  async findOneQuestion(id: string): Promise<Questions> {
+    try {
+      const found = await this.questionsRepository.findOneQuestion(id);
+      if (!found) {
+        throw new NotFoundException(`Question with ID "${id}" not found`);
+      }
+      return found;
+    } catch (error) {
+      throw new NotFoundException(`Question with ID "${id}" not found`);
+    }
+  }
 
   // async updateQuestion(
   //   id: string,
