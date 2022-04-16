@@ -53,23 +53,23 @@ export class QuestionsRepository extends Repository<Questions> {
     }
   }
 
-  // async findAllQuestions(): Promise<Questions[]> {
-  //   return await this.find();
-  // }
+  async findAllQuestions(): Promise<Questions[]> {
+    return await this.find();
+  }
 
-  // async findOneQuestion(id: string): Promise<Questions> {
-  //   try {
-  //     const found = await this.findOne(id);
-  //     if (!found) {
-  //       this.logger.error(`Question id "${id}" not found.`);
-  //       throw new NotFoundException(`Question with ID "${id}" not found`);
-  //     }
-  //     return found;
-  //   } catch (error) {
-  //     this.logger.error(error);
-  //     throw new InternalServerErrorException();
-  //   }
-  // }
+  async findOneQuestion(id: string): Promise<Questions> {
+    try {
+      const found = await this.findOne(id);
+      if (!found) {
+        this.logger.error(`Question id "${id}" not found.`);
+        throw new NotFoundException(`Question with ID "${id}" not found`);
+      }
+      return found;
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
 
   // async updateQuestion(
   //   id: string,
