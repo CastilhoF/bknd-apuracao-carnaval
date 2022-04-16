@@ -36,20 +36,20 @@ export class SchoolsController {
     return this.schoolsService.createSchools(createSchoolsDto);
   }
 
-  // @Get()
-  // findAllSchools(@GetUser() user: User): Promise<Schools[]> {
-  //   this.logger.verbose(`User "${user.username}" find all schools.`);
-  //   return this.schoolsService.findAllSchools();
-  // }
+  @Get()
+  findAllSchools(@GetUser() user: User): Promise<Schools[]> {
+    this.logger.verbose(`User "${user.username}" find all schools.`);
+    return this.schoolsService.findAllSchools();
+  }
 
-  // @Get(':id')
-  // findOneSchools(
-  //   @Param('id') id: string,
-  //   @GetUser() user: User,
-  // ): Promise<Schools> {
-  //   this.logger.verbose(`User "${user.username}" find one schools id: ${id}`);
-  //   return this.schoolsService.findOneSchools(id);
-  // }
+  @Get(':id')
+  findOneSchools(
+    @Param('id') id: string,
+    @GetUser() user: User,
+  ): Promise<Schools> {
+    this.logger.verbose(`User "${user.username}" find one schools id: ${id}`);
+    return this.schoolsService.findOneSchools(id);
+  }
 
   // @Patch(':id')
   // updateSchools(
