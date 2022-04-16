@@ -61,9 +61,9 @@ export class JudgesController {
     return this.judgesService.updateJudges(id, createJudgesDto);
   }
 
-  // @Delete(':id')
-  // deleteJudges(@Param('id') id: string, @GetUser() user: User): Promise<void> {
-  //   this.logger.verbose(`User "${user.username}" delete judges id: ${id}`);
-  //   return this.judgesService.deleteJudges(id);
-  // }
+  @Delete(':id')
+  deleteJudges(@Param('id') id: string, @GetUser() user: User): Promise<void> {
+    this.logger.verbose(`User "${user.username}" delete judges id: ${id}`);
+    return this.judgesService.deleteJudges(id);
+  }
 }
