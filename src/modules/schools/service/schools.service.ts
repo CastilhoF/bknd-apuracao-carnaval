@@ -38,12 +38,12 @@ export class SchoolsService {
     return found;
   }
 
-  // async updateSchools(
-  //   id: string,
-  //   createSchoolsDto: CreateSchoolsDto,
-  // ): Promise<Schools> {
-  //   return this.schoolsRepository.updateSchools(id, createSchoolsDto);
-  // }
+  async updateSchools(
+    id: string,
+    createSchoolsDto: CreateSchoolsDto,
+  ): Promise<Schools> {
+    return this.schoolsRepository.updateSchools(id, createSchoolsDto);
+  }
 
   // async deleteSchools(id: string): Promise<void> {
   //   const schools = await this.schoolsRepository.findOneSchools(id);
