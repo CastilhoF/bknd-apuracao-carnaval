@@ -51,15 +51,15 @@ export class SchoolsController {
     return this.schoolsService.findOneSchools(id);
   }
 
-  // @Patch(':id')
-  // updateSchools(
-  //   @GetUser() user: User,
-  //   @Param('id') id: string,
-  //   @Body() createSchoolsDto: CreateSchoolsDto,
-  // ): Promise<Schools> {
-  //   this.logger.verbose(`User "${user.username}" update schools id: ${id}`);
-  //   return this.schoolsService.updateSchools(id, createSchoolsDto);
-  // }
+  @Patch(':id')
+  updateSchools(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body() createSchoolsDto: CreateSchoolsDto,
+  ): Promise<Schools> {
+    this.logger.verbose(`User "${user.username}" update schools id: ${id}`);
+    return this.schoolsService.updateSchools(id, createSchoolsDto);
+  }
 
   // @Delete(':id')
   // deleteSchools(@Param('id') id: string, @GetUser() user: User): Promise<void> {
