@@ -82,14 +82,14 @@ export class JudgesRepository extends Repository<Judges> {
     return await this.save(judges);
   }
 
-  // async deleteJudges(id: string): Promise<Judges> {
-  //   const judges = await this.findOne(id);
+  async deleteJudges(id: string): Promise<Judges> {
+    const judges = await this.findOne(id);
 
-  //   if (!judges) {
-  //     this.logger.error(`Judges id "${id}" not found.`);
-  //     throw new NotFoundException(`Judges with ID "${id}" not found`);
-  //   }
+    if (!judges) {
+      this.logger.error(`Judges id "${id}" not found.`);
+      throw new NotFoundException(`Judges with ID "${id}" not found`);
+    }
 
-  //   return await this.remove(judges);
-  // }
+    return await this.remove(judges);
+  }
 }
