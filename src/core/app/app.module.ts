@@ -6,6 +6,7 @@ import { configEnvironmentsValidation } from '../config/validations/config.env.v
 import { TypeOrmConfig } from '../config/database/typeorm.config';
 import { EventModule } from 'src/modules/event/module/event.module';
 import { GroupModule } from 'src/modules/groups/module/groups.module';
+import { SchoolsModule } from 'src/modules/schools/module/schools.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { GroupModule } from 'src/modules/groups/module/groups.module';
     UserModule,
     EventModule,
     GroupModule,
+    SchoolsModule,
   ],
 })
 export class AppModule {}
