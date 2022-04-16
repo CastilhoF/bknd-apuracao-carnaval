@@ -26,17 +26,17 @@ export class SchoolsService {
     return this.schoolsRepository.createSchools(createSchoolsDto);
   }
 
-  // async findAllSchools(): Promise<Schools[]> {
-  //   return this.schoolsRepository.findAllSchools();
-  // }
+  async findAllSchools(): Promise<Schools[]> {
+    return this.schoolsRepository.findAllSchools();
+  }
 
-  // async findOneSchools(id: string): Promise<Schools> {
-  //   const found = await this.schoolsRepository.findOneSchools(id);
-  //   if (!found) {
-  //     throw new NotFoundException(`Schools with ID "${id}" not found`);
-  //   }
-  //   return found;
-  // }
+  async findOneSchools(id: string): Promise<Schools> {
+    const found = await this.schoolsRepository.findOneSchools(id);
+    if (!found) {
+      throw new NotFoundException(`Schools with ID "${id}" not found`);
+    }
+    return found;
+  }
 
   // async updateSchools(
   //   id: string,
