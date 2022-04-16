@@ -8,6 +8,7 @@ import { EventModule } from 'src/modules/event/module/event.module';
 import { GroupModule } from 'src/modules/groups/module/groups.module';
 import { SchoolsModule } from 'src/modules/schools/module/schools.module';
 import { JudgesModule } from 'src/modules/judges/module/judges.module';
+import { QuestionsModule } from 'src/modules/questions/module/questions.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { JudgesModule } from 'src/modules/judges/module/judges.module';
     GroupModule,
     SchoolsModule,
     JudgesModule,
+    QuestionsModule,
   ],
 })
 export class AppModule {}
