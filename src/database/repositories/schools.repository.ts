@@ -82,14 +82,14 @@ export class SchoolsRepository extends Repository<Schools> {
     return await this.save(schools);
   }
 
-  // async deleteSchools(id: string): Promise<void> {
-  //   const schools = await this.findOne(id);
+  async deleteSchools(id: string): Promise<void> {
+    const schools = await this.findOne(id);
 
-  //   if (!schools) {
-  //     this.logger.error(`Schools id "${id}" not found.`);
-  //     throw new NotFoundException(`Schools with ID "${id}" not found`);
-  //   }
+    if (!schools) {
+      this.logger.error(`Schools id "${id}" not found.`);
+      throw new NotFoundException(`Schools with ID "${id}" not found`);
+    }
 
-  //   await this.delete(schools);
-  // }
+    await this.delete(schools);
+  }
 }
