@@ -111,14 +111,14 @@ export class QuestionsRepository extends Repository<Questions> {
     return await this.save(question);
   }
 
-  // async deleteQuestion(id: string): Promise<void> {
-  //   const question = await this.findOne(id);
+  async deleteQuestion(id: string): Promise<void> {
+    const question = await this.findOne(id);
 
-  //   if (!question) {
-  //     this.logger.error(`Question id "${id}" not found.`);
-  //     throw new NotFoundException(`Question with ID "${id}" not found`);
-  //   }
+    if (!question) {
+      this.logger.error(`Question id "${id}" not found.`);
+      throw new NotFoundException(`Question with ID "${id}" not found`);
+    }
 
-  //   await this.delete(question);
-  // }
+    await this.delete(question);
+  }
 }
