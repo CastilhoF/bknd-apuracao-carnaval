@@ -26,17 +26,17 @@ export class JudgesService {
     return this.judgesRepository.createJudges(createJudgesDto);
   }
 
-  // async findAllJudges(): Promise<Judges[]> {
-  //   return this.judgesRepository.findAllJudges();
-  // }
+  async findAllJudges(): Promise<Judges[]> {
+    return this.judgesRepository.findAllJudges();
+  }
 
-  // async findOneJudges(id: string): Promise<Judges> {
-  //   const found = await this.judgesRepository.findOneJudges(id);
-  //   if (!found) {
-  //     throw new NotFoundException(`Judges with ID "${id}" not found`);
-  //   }
-  //   return found;
-  // }
+  async findOneJudges(id: string): Promise<Judges> {
+    const found = await this.judgesRepository.findOneJudges(id);
+    if (!found) {
+      throw new NotFoundException(`Judges with ID "${id}" not found`);
+    }
+    return found;
+  }
 
   // async updateJudges(
   //   id: string,
