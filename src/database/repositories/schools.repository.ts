@@ -35,23 +35,23 @@ export class SchoolsRepository extends Repository<Schools> {
     }
   }
 
-  // async findAllSchools(): Promise<Schools[]> {
-  //   return await this.find();
-  // }
+  async findAllSchools(): Promise<Schools[]> {
+    return await this.find();
+  }
 
-  // async findOneSchools(id: string): Promise<Schools> {
-  //   try {
-  //     const found = await this.findOne(id);
-  //     if (!found) {
-  //       this.logger.error(`Schools id "${id}" not found.`);
-  //       throw new NotFoundException(`Schools with ID "${id}" not found`);
-  //     }
-  //     return found;
-  //   } catch (error) {
-  //     this.logger.error(error);
-  //     throw new InternalServerErrorException();
-  //   }
-  // }
+  async findOneSchools(id: string): Promise<Schools> {
+    try {
+      const found = await this.findOne(id);
+      if (!found) {
+        this.logger.error(`Schools id "${id}" not found.`);
+        throw new NotFoundException(`Schools with ID "${id}" not found`);
+      }
+      return found;
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
 
   // async updateSchools(
   //   id: string,
