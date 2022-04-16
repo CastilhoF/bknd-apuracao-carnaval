@@ -40,6 +40,6 @@ export class EventService {
     if (!event) {
       throw new NotFoundException(`Event with ID "${id}" not found`);
     }
-    await this.eventRepository.delete(id);
+    await this.eventRepository.deleteEvent(id);
   }
 }

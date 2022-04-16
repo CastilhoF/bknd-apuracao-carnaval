@@ -50,6 +50,6 @@ export class GroupService {
     if (!group) {
       throw new NotFoundException(`Group with ID "${id}" not found`);
     }
-    await this.groupRepository.delete(id);
+    await this.groupRepository.deleteGroup(id);
   }
 }
