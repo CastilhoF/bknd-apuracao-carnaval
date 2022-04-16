@@ -11,7 +11,7 @@ export class CreateQuestionDto {
   judge_two_id: string;
 
   @IsString()
-  judge_tree_id: string;
+  judge_three_id: string;
 
   @IsString()
   judge_four_id: string;
