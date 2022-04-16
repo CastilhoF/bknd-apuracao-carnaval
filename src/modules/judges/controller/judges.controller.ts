@@ -36,20 +36,20 @@ export class JudgesController {
     return this.judgesService.createJudges(createJudgesDto);
   }
 
-  // @Get()
-  // findAllJudges(@GetUser() user: User): Promise<Judges[]> {
-  //   this.logger.verbose(`User "${user.username}" find all judges.`);
-  //   return this.judgesService.findAllJudges();
-  // }
+  @Get()
+  findAllJudges(@GetUser() user: User): Promise<Judges[]> {
+    this.logger.verbose(`User "${user.username}" find all judges.`);
+    return this.judgesService.findAllJudges();
+  }
 
-  // @Get(':id')
-  // findOneJudges(
-  //   @Param('id') id: string,
-  //   @GetUser() user: User,
-  // ): Promise<Judges> {
-  //   this.logger.verbose(`User "${user.username}" find one judges id: ${id}`);
-  //   return this.judgesService.findOneJudges(id);
-  // }
+  @Get(':id')
+  findOneJudges(
+    @Param('id') id: string,
+    @GetUser() user: User,
+  ): Promise<Judges> {
+    this.logger.verbose(`User "${user.username}" find one judges id: ${id}`);
+    return this.judgesService.findOneJudges(id);
+  }
 
   // @Patch(':id')
   // updateJudges(
