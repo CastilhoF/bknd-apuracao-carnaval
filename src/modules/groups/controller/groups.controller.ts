@@ -11,8 +11,8 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../user/decorators/get.user.decorator';
 import { CreateGroupDto } from '../dtos/create.group.dto';
-import { User } from 'src/database/entities/user.entity';
-import { Group } from 'src/database/entities/groups.entity';
+import { User } from '../../../database/entities/user.entity';
+import { Group } from '../../../database/entities/groups.entity';
 import { GroupService } from '../service/groups.service';
 import { Logger } from '@nestjs/common';
 
