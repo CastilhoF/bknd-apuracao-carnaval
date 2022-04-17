@@ -53,23 +53,23 @@ export class VerificationRepository extends Repository<Verification> {
     }
   }
 
-  // async findAllVerifications(): Promise<Verification[]> {
-  //   return await this.find();
-  // }
+  async findAllVerifications(): Promise<Verification[]> {
+    return await this.find();
+  }
 
-  // async findOneVerification(id: string): Promise<Verification> {
-  //   try {
-  //     const found = await this.findOne(id);
-  //     if (!found) {
-  //       this.logger.error(`Verification with id ${id} not found`);
-  //       throw new NotFoundException(`Verification with id ${id} not found`);
-  //     }
-  //     return found;
-  //   } catch (error) {
-  //     this.logger.error(error);
-  //     throw new InternalServerErrorException();
-  //   }
-  // }
+  async findOneVerification(id: string): Promise<Verification> {
+    try {
+      const found = await this.findOne(id);
+      if (!found) {
+        this.logger.error(`Verification with id ${id} not found`);
+        throw new NotFoundException(`Verification with id ${id} not found`);
+      }
+      return found;
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
 
   // async updateVerification(
   //   id: string,
