@@ -71,45 +71,45 @@ export class VerificationRepository extends Repository<Verification> {
     }
   }
 
-  // async updateVerification(
-  //   id: string,
-  //   createVerificationDto: CreateVerificationDto,
-  // ): Promise<Verification> {
-  //   const {
-  //     judge_name,
-  //     question_name,
-  //     school_name,
-  //     group_name,
-  //     event_name,
-  //     note_value,
-  //   } = createVerificationDto;
+  async updateVerification(
+    id: string,
+    createVerificationDto: CreateVerificationDto,
+  ): Promise<Verification> {
+    const {
+      judge_name,
+      question_name,
+      school_name,
+      group_name,
+      event_name,
+      note_value,
+    } = createVerificationDto;
 
-  //   const date = new Date();
+    const date = new Date();
 
-  //   const updatedAt = FormatDateAndTime(date);
+    const updatedAt = FormatDateAndTime(date);
 
-  //   if (!id) {
-  //     this.logger.error(`Verification id ${id} not found`);
-  //     throw new NotFoundException(`Verification with id ${id} not found`);
-  //   }
+    if (!id) {
+      this.logger.error(`Verification id ${id} not found`);
+      throw new NotFoundException(`Verification with id ${id} not found`);
+    }
 
-  //   const verification = await this.findOne(id);
+    const verification = await this.findOne(id);
 
-  //   if (!verification) {
-  //     this.logger.error(`Verification with id ${id} not found`);
-  //     throw new NotFoundException(`Verification with id ${id} not found`);
-  //   }
+    if (!verification) {
+      this.logger.error(`Verification with id ${id} not found`);
+      throw new NotFoundException(`Verification with id ${id} not found`);
+    }
 
-  //   verification.judge_name = judge_name;
-  //   verification.question_name = question_name;
-  //   verification.school_name = school_name;
-  //   verification.group_name = group_name;
-  //   verification.event_name = event_name;
-  //   verification.note_value = note_value;
-  //   verification.updatedAt = updatedAt;
+    verification.judge_name = judge_name;
+    verification.question_name = question_name;
+    verification.school_name = school_name;
+    verification.group_name = group_name;
+    verification.event_name = event_name;
+    verification.note_value = note_value;
+    verification.updatedAt = updatedAt;
 
-  //   return await this.save(verification);
-  // }
+    return await this.save(verification);
+  }
 
   // async deleteVerification(id: string): Promise<void> {
   //   const verification = await this.findOne(id);
