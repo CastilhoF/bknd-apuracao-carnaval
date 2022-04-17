@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Schools } from 'src/database/entities/schools.entity';
-import { CreateSchoolsDto } from 'src/modules/schools/dtos/create.schools.dto';
-import { SchoolsRepository } from 'src/database/repositories/schools.repository';
-import { GroupRepository } from 'src/database/repositories/groups.repository';
+import { Schools } from '../../../database/entities/schools.entity';
+import { CreateSchoolsDto } from '../../../modules/schools/dtos/create.schools.dto';
+import { SchoolsRepository } from '../../../database/repositories/schools.repository';
+import { GroupRepository } from '../../../database/repositories/groups.repository';
 
 @Injectable()
 export class SchoolsService {
@@ -50,6 +50,6 @@ export class SchoolsService {
     if (!schools) {
       throw new NotFoundException(`Schools with ID "${id}" not found`);
     }
-    await this.schoolsRepository.delete(id);
+    await this.schoolsRepository.deleteSchools(id);
   }
 }
