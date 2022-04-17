@@ -39,13 +39,13 @@ export class VerificationService {
     );
   }
 
-  // async deleteVerification(id: string): Promise<void> {
-  //   const verification = await this.verificationRepository.findOneVerification(
-  //     id,
-  //   );
-  //   if (!verification) {
-  //     throw new NotFoundException(`Verification with ID "${id}" not found`);
-  //   }
-  //   await this.verificationRepository.deleteVerification(id);
-  // }
+  async deleteVerification(id: string): Promise<void> {
+    const verification = await this.verificationRepository.findOneVerification(
+      id,
+    );
+    if (!verification) {
+      throw new NotFoundException(`Verification with ID "${id}" not found`);
+    }
+    await this.verificationRepository.deleteVerification(id);
+  }
 }
