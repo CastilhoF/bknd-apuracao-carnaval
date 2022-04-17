@@ -11,8 +11,8 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../user/decorators/get.user.decorator';
 import { CreateSchoolsDto } from '../dtos/create.schools.dto';
-import { User } from 'src/database/entities/user.entity';
-import { Schools } from 'src/database/entities/schools.entity';
+import { User } from '../../../database/entities/user.entity';
+import { Schools } from '../../../database/entities/schools.entity';
 import { SchoolsService } from '../service/schools.service';
 import { Logger } from '@nestjs/common';
 
