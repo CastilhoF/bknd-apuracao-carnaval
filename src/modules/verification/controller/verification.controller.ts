@@ -38,22 +38,22 @@ export class VerificationController {
     return this.verificationService.createVerification(createVerificationDto);
   }
 
-  // @Get()
-  // findAllVerification(@GetUser() user: User): Promise<Verification[]> {
-  //   this.logger.verbose(`User "${user.username}" find all verification.`);
-  //   return this.verificationService.findAllVerification();
-  // }
+  @Get()
+  findAllVerification(@GetUser() user: User): Promise<Verification[]> {
+    this.logger.verbose(`User "${user.username}" find all verification.`);
+    return this.verificationService.findAllVerification();
+  }
 
-  // @Get(':id')
-  // findOneVerification(
-  //   @Param('id') id: string,
-  //   @GetUser() user: User,
-  // ): Promise<Verification> {
-  //   this.logger.verbose(
-  //     `User "${user.username}" find one verification id: ${id}`,
-  //   );
-  //   return this.verificationService.findOneVerification(id);
-  // }
+  @Get(':id')
+  findOneVerification(
+    @Param('id') id: string,
+    @GetUser() user: User,
+  ): Promise<Verification> {
+    this.logger.verbose(
+      `User "${user.username}" find one verification id: ${id}`,
+    );
+    return this.verificationService.findOneVerification(id);
+  }
 
   // @Patch(':id')
   // updateVerification(
