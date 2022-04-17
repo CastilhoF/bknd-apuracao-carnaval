@@ -6,7 +6,7 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { FormatDateAndTime } from 'src/utils/format.date';
+import { FormatDateAndTime } from '../../utils/format.date';
 import { Logger } from '@nestjs/common';
 
 @EntityRepository(Judges)
