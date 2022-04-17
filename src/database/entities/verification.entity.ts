@@ -1,9 +1,4 @@
-import { Exclude } from 'class-transformer';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Questions } from './questions.entity';
-import { Schools } from './schools.entity';
-import { Judges } from './judges.entity';
-import { Group } from './groups.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Verification {
@@ -11,11 +6,26 @@ export class Verification {
   id: string;
 
   @Column()
-  nota: number;
+  judge_name: string;
 
   @Column()
-  createdAt: Date;
+  question_name: string;
 
   @Column()
-  updatedAt: Date;
+  school_name: string;
+
+  @Column()
+  group_name: string;
+
+  @Column()
+  event_name: string;
+
+  @Column()
+  note_value: number;
+
+  @Column()
+  createdAt: string;
+
+  @Column()
+  updatedAt: string;
 }
