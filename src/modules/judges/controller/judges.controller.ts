@@ -11,8 +11,8 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../user/decorators/get.user.decorator';
 import { CreateJudgesDto } from '../dtos/create.judges.dto';
-import { User } from 'src/database/entities/user.entity';
-import { Judges } from 'src/database/entities/judges.entity';
+import { User } from '../../../database/entities/user.entity';
+import { Judges } from '../../../database/entities/judges.entity';
 import { JudgesService } from '../service/judges.service';
 import { Logger } from '@nestjs/common';
 
