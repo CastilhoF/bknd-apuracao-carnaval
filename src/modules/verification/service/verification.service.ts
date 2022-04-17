@@ -29,15 +29,15 @@ export class VerificationService {
     return found;
   }
 
-  // async updateVerification(
-  //   id: string,
-  //   createVerification: CreateVerificationDto,
-  // ): Promise<Verification> {
-  //   return this.verificationRepository.updateVerification(
-  //     id,
-  //     createVerification,
-  //   );
-  // }
+  async updateVerification(
+    id: string,
+    createVerification: CreateVerificationDto,
+  ): Promise<Verification> {
+    return this.verificationRepository.updateVerification(
+      id,
+      createVerification,
+    );
+  }
 
   // async deleteVerification(id: string): Promise<void> {
   //   const verification = await this.verificationRepository.findOneVerification(
