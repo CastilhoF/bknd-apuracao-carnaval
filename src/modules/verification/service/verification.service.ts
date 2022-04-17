@@ -17,17 +17,17 @@ export class VerificationService {
     return this.verificationRepository.createVerification(createVerification);
   }
 
-  // async findAllVerification(): Promise<Verification[]> {
-  //   return this.verificationRepository.findAllVerifications();
-  // }
+  async findAllVerification(): Promise<Verification[]> {
+    return this.verificationRepository.findAllVerifications();
+  }
 
-  // async findOneVerification(id: string): Promise<Verification> {
-  //   const found = await this.verificationRepository.findOneVerification(id);
-  //   if (!found) {
-  //     throw new NotFoundException(`Verification with ID "${id}" not found`);
-  //   }
-  //   return found;
-  // }
+  async findOneVerification(id: string): Promise<Verification> {
+    const found = await this.verificationRepository.findOneVerification(id);
+    if (!found) {
+      throw new NotFoundException(`Verification with ID "${id}" not found`);
+    }
+    return found;
+  }
 
   // async updateVerification(
   //   id: string,
