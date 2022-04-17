@@ -55,20 +55,20 @@ export class VerificationController {
     return this.verificationService.findOneVerification(id);
   }
 
-  // @Patch(':id')
-  // updateVerification(
-  //   @GetUser() user: User,
-  //   @Param('id') id: string,
-  //   @Body() createVerificationDto: CreateVerificationDto,
-  // ): Promise<Verification> {
-  //   this.logger.verbose(
-  //     `User "${user.username}" update verification id: ${id}`,
-  //   );
-  //   return this.verificationService.updateVerification(
-  //     id,
-  //     createVerificationDto,
-  //   );
-  // }
+  @Patch(':id')
+  updateVerification(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body() createVerificationDto: CreateVerificationDto,
+  ): Promise<Verification> {
+    this.logger.verbose(
+      `User "${user.username}" update verification id: ${id}`,
+    );
+    return this.verificationService.updateVerification(
+      id,
+      createVerificationDto,
+    );
+  }
 
   // @Delete(':id')
   // deleteVerification(
