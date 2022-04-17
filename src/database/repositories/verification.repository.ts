@@ -111,12 +111,12 @@ export class VerificationRepository extends Repository<Verification> {
     return await this.save(verification);
   }
 
-  // async deleteVerification(id: string): Promise<void> {
-  //   const verification = await this.findOne(id);
-  //   if (!verification) {
-  //     this.logger.error(`Verification with id ${id} not found.`);
-  //     throw new NotFoundException(`Verification with ID "${id}" not found`);
-  //   }
-  //   await this.delete(id);
-  // }
+  async deleteVerification(id: string): Promise<void> {
+    const verification = await this.findOne(id);
+    if (!verification) {
+      this.logger.error(`Verification with id ${id} not found.`);
+      throw new NotFoundException(`Verification with ID "${id}" not found`);
+    }
+    await this.delete(id);
+  }
 }
