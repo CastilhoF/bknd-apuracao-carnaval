@@ -4,7 +4,7 @@ import { JudgesService } from '../service/judges.service';
 import { JudgesRepository } from '../../../database/repositories/judges.repository';
 import { UserModule } from '../../../modules/user/module/user.module';
 import { JudgesController } from '../controller/judges.controller';
-import { QuestionsRepository } from 'src/database/repositories/question.repository';
+import { QuestionsRepository } from '../../../database/repositories/question.repository';
 
 @Module({
   imports: [
