@@ -70,14 +70,14 @@ export class VerificationController {
     );
   }
 
-  // @Delete(':id')
-  // deleteVerification(
-  //   @GetUser() user: User,
-  //   @Param('id') id: string,
-  // ): Promise<void> {
-  //   this.logger.verbose(
-  //     `User "${user.username}" delete verification id: ${id}`,
-  //   );
-  //   return this.verificationService.deleteVerification(id);
-  // }
+  @Delete(':id')
+  deleteVerification(
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ): Promise<void> {
+    this.logger.verbose(
+      `User "${user.username}" delete verification id: ${id}`,
+    );
+    return this.verificationService.deleteVerification(id);
+  }
 }
