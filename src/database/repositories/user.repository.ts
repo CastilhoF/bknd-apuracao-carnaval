@@ -6,7 +6,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { FormatDateAndTime } from 'src/utils/format.date';
+import { FormatDateAndTime } from '../../utils/format.date';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
