@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Judges } from 'src/database/entities/judges.entity';
-import { CreateJudgesDto } from 'src/modules/judges/dtos/create.judges.dto';
-import { JudgesRepository } from 'src/database/repositories/judges.repository';
-import { QuestionsRepository } from 'src/database/repositories/question.repository';
+import { Judges } from '../../../database/entities/judges.entity';
+import { CreateJudgesDto } from '../../../modules/judges/dtos/create.judges.dto';
+import { JudgesRepository } from '../../../database/repositories/judges.repository';
+import { QuestionsRepository } from '../../../database/repositories/question.repository';
 
 @Injectable()
 export class JudgesService {

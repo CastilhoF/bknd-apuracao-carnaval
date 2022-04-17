@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from '../../../database/entities/event.entity';
 import { CreateEventDto } from '../dtos/create.event.dto';
 import { EventRepository } from '../../../database/repositories/event.repository';
-import { User } from 'src/database/entities/user.entity';
 
 @Injectable()
 export class EventService {
