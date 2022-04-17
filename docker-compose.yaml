@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  api:
+    container_name: o-dia-backend-apuracao-carnaval
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: run
+    ports:
+      - "3008:3008"
+    env_file: .stage.prod.env  
+    restart: on-failure
+volumes:
+  api:
