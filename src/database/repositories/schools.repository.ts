@@ -14,7 +14,7 @@ export class SchoolsRepository extends Repository<Schools> {
   private logger = new Logger('SchoolsRepository');
 
   async createSchools(createSchoolsDto: CreateSchoolsDto): Promise<Schools> {
-    const { name, group_id } = createSchoolsDto;
+    const { name, city_name } = createSchoolsDto;
 
     const date = new Date();
 
@@ -22,7 +22,7 @@ export class SchoolsRepository extends Repository<Schools> {
 
     const updatedAt = FormatDateAndTime(date);
 
-    const schools = this.create({ name, group_id, createdAt, updatedAt });
+    const schools = this.create({ name, city_name, createdAt, updatedAt });
 
     try {
       return await this.save(schools);
@@ -57,18 +57,13 @@ export class SchoolsRepository extends Repository<Schools> {
     id: string,
     createSchoolsDto: CreateSchoolsDto,
   ): Promise<Schools> {
-    const { name, group_id } = createSchoolsDto;
+    const { name, city_name } = createSchoolsDto;
 
     const date = new Date();
 
     const updatedAt = FormatDateAndTime(date);
 
-    if (!id) {
-      this.logger.error(`Schools id "${id}" not found.`);
-      throw new NotFoundException(`Schools with ID "${id}" not found`);
-    }
-
-    const schools = this.create({ name, group_id, updatedAt });
+    const schools = await this.findOne(id);
 
     if (!schools) {
       this.logger.error(`Schools id "${id}" not found.`);
@@ -76,7 +71,7 @@ export class SchoolsRepository extends Repository<Schools> {
     }
 
     schools.name = name;
-    schools.group_id = group_id;
+    schools.city_name = city_name;
     schools.updatedAt = updatedAt;
 
     return await this.save(schools);
