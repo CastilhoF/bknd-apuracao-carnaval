@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       target: run
     ports:
-      - "3008:3008"
+      - "3007:3007"
     env_file: .stage.prod.env  
     restart: on-failure
 volumes:
