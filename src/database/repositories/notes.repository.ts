@@ -1,11 +1,11 @@
-import { EntityRepository, Repository } from 'typeorm';
-import { Schools } from '../entities/schools.entity';
+import { EntityRepository, FindManyOptions, Repository } from 'typeorm';
 import { Notes } from '../entities/notes.entity';
 import { CreateNoteDto } from 'src/modules/notes/dtos/create.note.dto';
 import {
   ConflictException,
   InternalServerErrorException,
   NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { FormatDateAndTime } from '../../utils/format.date';
 import { Logger } from '@nestjs/common';
@@ -23,6 +23,26 @@ export class NotesRepository extends Repository<Notes> {
 
     const updatedAt = FormatDateAndTime(date);
 
+    if (!judge) {
+      throw new BadRequestException('Judge are required');
+    }
+
+    if (!school) {
+      throw new BadRequestException('School are required');
+    }
+
+    if (!category) {
+      throw new BadRequestException('Category are required');
+    }
+
+    if (!event) {
+      throw new BadRequestException('Event are required');
+    }
+
+    if (!value) {
+      throw new BadRequestException('Value are required');
+    }
+
     const note = this.create({
       judge,
       school,
@@ -36,20 +56,31 @@ export class NotesRepository extends Repository<Notes> {
     try {
       return await this.save(note);
     } catch (error) {
-      throw new InternalServerErrorException();
+      if (error.code === 'ER_DUP_ENTRY') {
+        throw new ConflictException('Judges name already exists');
+      } else {
+        throw new InternalServerErrorException();
+      }
     }
   }
 
   async findAllNotes(): Promise<Notes[]> {
-    return await this.find();
+    const findOptions: FindManyOptions = {
+      relations: ['judge', 'school', 'category', 'event'],
+    };
+    return await this.find(findOptions);
   }
 
   async findOneNote(id: string): Promise<Notes> {
     try {
-      const found = await this.findOne(id);
+      const findOptions = {
+        relations: ['judge', 'school', 'category', 'event'],
+        where: { id },
+      };
+      const found = await this.findOne(findOptions);
       if (!found) {
         this.logger.error(`Notes id "${id}" not found.`);
-        throw new NotFoundException(`Notes with ID "${id}" not found`);
+        throw new BadRequestException(`Notes with ID "${id}" not found`);
       }
       return found;
     } catch (error) {

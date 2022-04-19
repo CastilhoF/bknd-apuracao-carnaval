@@ -8,7 +8,11 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post('signup')
-  signUp(@Body() userCredentialsDto: UserCredentialsDto) {
+  signUp(
+    @Res({ passthrough: true }) res: Response,
+    @Body() userCredentialsDto: UserCredentialsDto,
+  ) {
+    res.status(HttpStatus.CREATED);
     return this.userService.signUp(userCredentialsDto);
   }
 

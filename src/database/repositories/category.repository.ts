@@ -31,7 +31,7 @@ export class CategoryRepository extends Repository<Category> {
     try {
       return await this.save(category);
     } catch (error) {
-      if (error.code === '23505') {
+      if (error.code === 'ER_DUP_ENTRY') {
         throw new ConflictException('Category name already exists');
       } else {
         throw new InternalServerErrorException();

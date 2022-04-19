@@ -9,7 +9,7 @@ export class Schools {
   name: string;
 
   @Column()
-  city_name: string;
+  city: string;
 
   @Column()
   createdAt: string;

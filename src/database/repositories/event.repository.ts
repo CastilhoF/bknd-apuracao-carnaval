@@ -14,15 +14,8 @@ export class EventRepository extends Repository<Event> {
   private logger = new Logger('EventRepository');
 
   async createEvent(createEventDto: CreateEventDto): Promise<Event> {
-    const {
-      name,
-      city_name,
-      year,
-      champions,
-      demotes,
-      discard_min,
-      discard_max,
-    } = createEventDto;
+    const { name, city, year, champions, demotes, discard_min, discard_max } =
+      createEventDto;
 
     const date = new Date();
 
@@ -32,7 +25,7 @@ export class EventRepository extends Repository<Event> {
 
     const event = this.create({
       name,
-      city_name,
+      city,
       year,
       champions,
       demotes,
@@ -45,7 +38,7 @@ export class EventRepository extends Repository<Event> {
     try {
       return await this.save(event);
     } catch (error) {
-      if (error.code === '23505') {
+      if (error.code === 'ER_DUP_ENTRY') {
         throw new ConflictException('Event name already exists');
       } else {
         throw new InternalServerErrorException();
@@ -75,15 +68,8 @@ export class EventRepository extends Repository<Event> {
     id: string,
     createEventDto: CreateEventDto,
   ): Promise<Event> {
-    const {
-      name,
-      city_name,
-      year,
-      champions,
-      demotes,
-      discard_min,
-      discard_max,
-    } = createEventDto;
+    const { name, city, year, champions, demotes, discard_min, discard_max } =
+      createEventDto;
 
     const date = new Date();
 
@@ -97,7 +83,7 @@ export class EventRepository extends Repository<Event> {
     }
 
     event.name = name;
-    event.city_name = city_name;
+    event.city = city;
     event.year = year;
     event.champions = champions;
     event.demotes = demotes;

@@ -14,7 +14,7 @@ export class SchoolsRepository extends Repository<Schools> {
   private logger = new Logger('SchoolsRepository');
 
   async createSchools(createSchoolsDto: CreateSchoolsDto): Promise<Schools> {
-    const { name, city_name } = createSchoolsDto;
+    const { name, city } = createSchoolsDto;
 
     const date = new Date();
 
@@ -22,13 +22,13 @@ export class SchoolsRepository extends Repository<Schools> {
 
     const updatedAt = FormatDateAndTime(date);
 
-    const schools = this.create({ name, city_name, createdAt, updatedAt });
+    const schools = this.create({ name, city, createdAt, updatedAt });
 
     try {
       return await this.save(schools);
     } catch (error) {
-      if (error.code === '23505') {
-        throw new ConflictException('Schools name already exists');
+      if (error.code === 'ER_DUP_ENTRY') {
+        throw new ConflictException('School name already exists');
       } else {
         throw new InternalServerErrorException();
       }
@@ -43,8 +43,8 @@ export class SchoolsRepository extends Repository<Schools> {
     try {
       const found = await this.findOne(id);
       if (!found) {
-        this.logger.error(`Schools id "${id}" not found.`);
-        throw new NotFoundException(`Schools with ID "${id}" not found`);
+        this.logger.error(`School id "${id}" not found.`);
+        throw new NotFoundException(`School with ID "${id}" not found`);
       }
       return found;
     } catch (error) {
@@ -57,7 +57,7 @@ export class SchoolsRepository extends Repository<Schools> {
     id: string,
     createSchoolsDto: CreateSchoolsDto,
   ): Promise<Schools> {
-    const { name, city_name } = createSchoolsDto;
+    const { name, city } = createSchoolsDto;
 
     const date = new Date();
 
@@ -66,12 +66,12 @@ export class SchoolsRepository extends Repository<Schools> {
     const schools = await this.findOne(id);
 
     if (!schools) {
-      this.logger.error(`Schools id "${id}" not found.`);
-      throw new NotFoundException(`Schools with ID "${id}" not found`);
+      this.logger.error(`School id "${id}" not found.`);
+      throw new NotFoundException(`School with ID "${id}" not found`);
     }
 
     schools.name = name;
-    schools.city_name = city_name;
+    schools.city = city;
     schools.updatedAt = updatedAt;
 
     return await this.save(schools);
@@ -81,8 +81,8 @@ export class SchoolsRepository extends Repository<Schools> {
     const schools = await this.findOne(id);
 
     if (!schools) {
-      this.logger.error(`Schools id "${id}" not found.`);
-      throw new NotFoundException(`Schools with ID "${id}" not found`);
+      this.logger.error(`School id "${id}" not found.`);
+      throw new NotFoundException(`School with ID "${id}" not found`);
     }
 
     await this.delete(schools);
