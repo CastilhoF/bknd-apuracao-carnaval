@@ -27,8 +27,8 @@ export class JudgesRepository extends Repository<Judges> {
     try {
       return await this.save(judges);
     } catch (error) {
-      if (error.code === '23505') {
-        throw new ConflictException('Judges name already exists');
+      if (error.code === 'ER_DUP_ENTRY') {
+        throw new ConflictException('Judge name already exists');
       } else {
         throw new InternalServerErrorException();
       }
@@ -43,8 +43,8 @@ export class JudgesRepository extends Repository<Judges> {
     try {
       const found = await this.findOne(id);
       if (!found) {
-        this.logger.error(`Judges id "${id}" not found.`);
-        throw new NotFoundException(`Judges with ID "${id}" not found`);
+        this.logger.error(`Judge id "${id}" not found.`);
+        throw new NotFoundException(`Judge with ID "${id}" not found`);
       }
       return found;
     } catch (error) {
@@ -64,15 +64,15 @@ export class JudgesRepository extends Repository<Judges> {
     const updatedAt = FormatDateAndTime(date);
 
     if (!id) {
-      this.logger.error(`Judges id "${id}" not found.`);
-      throw new NotFoundException(`Judges with ID "${id}" not found`);
+      this.logger.error(`Judge id "${id}" not found.`);
+      throw new NotFoundException(`Judge with ID "${id}" not found`);
     }
 
     const judges = await this.findOne(id);
 
     if (!judges) {
-      this.logger.error(`Judges id "${id}" not found.`);
-      throw new NotFoundException(`Judges with ID "${id}" not found`);
+      this.logger.error(`Judge id "${id}" not found.`);
+      throw new NotFoundException(`Judge with ID "${id}" not found`);
     }
 
     judges.name = name;
@@ -85,8 +85,8 @@ export class JudgesRepository extends Repository<Judges> {
     const judges = await this.findOne(id);
 
     if (!judges) {
-      this.logger.error(`Judges id "${id}" not found.`);
-      throw new NotFoundException(`Judges with ID "${id}" not found`);
+      this.logger.error(`Judge id "${id}" not found.`);
+      throw new NotFoundException(`Judge with ID "${id}" not found`);
     }
 
     return await this.remove(judges);
