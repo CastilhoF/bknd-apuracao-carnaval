@@ -1,15 +1,21 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { CategoryItem } from './category.item.entity';
+import { Notes } from './notes.entity';
 
 @Entity()
 export class Judges {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   name: string;
-
-  @Column()
-  question_id: string;
 
   @Column()
   createdAt: string;
