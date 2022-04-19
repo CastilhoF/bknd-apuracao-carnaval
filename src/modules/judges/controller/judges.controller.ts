@@ -5,7 +5,9 @@ import {
   Get,
   Param,
   Post,
-  Patch,
+  HttpStatus,
+  Res,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -15,6 +17,7 @@ import { User } from '../../../database/entities/user.entity';
 import { Judges } from '../../../database/entities/judges.entity';
 import { JudgesService } from '../service/judges.service';
 import { Logger } from '@nestjs/common';
+import { Response } from 'express';
 
 @Controller('judges')
 @UseGuards(AuthGuard())
@@ -27,18 +30,24 @@ export class JudgesController {
   createJudges(
     @Body() createJudgesDto: CreateJudgesDto,
     @GetUser() user: User,
+    @Res({ passthrough: true }) res: Response,
   ): Promise<Judges> {
     this.logger.verbose(
       `User "${user.username}" create a new judges. Judges: ${JSON.stringify(
         createJudgesDto,
       )}`,
     );
+    res.status(HttpStatus.CREATED);
     return this.judgesService.createJudges(createJudgesDto);
   }
 
   @Get()
-  findAllJudges(@GetUser() user: User): Promise<Judges[]> {
+  findAllJudges(
+    @Res({ passthrough: true }) res: Response,
+    @GetUser() user: User,
+  ): Promise<Judges[]> {
     this.logger.verbose(`User "${user.username}" find all judges.`);
+    res.status(HttpStatus.OK);
     return this.judgesService.findAllJudges();
   }
 
@@ -46,24 +55,33 @@ export class JudgesController {
   findOneJudges(
     @Param('id') id: string,
     @GetUser() user: User,
+    @Res({ passthrough: true }) res: Response,
   ): Promise<Judges> {
     this.logger.verbose(`User "${user.username}" find one judges id: ${id}`);
+    res.status(HttpStatus.OK);
     return this.judgesService.findOneJudges(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   updateJudges(
     @GetUser() user: User,
+    @Res({ passthrough: true }) res: Response,
     @Param('id') id: string,
     @Body() createJudgesDto: CreateJudgesDto,
   ): Promise<Judges> {
     this.logger.verbose(`User "${user.username}" update judges id: ${id}`);
+    res.status(HttpStatus.OK);
     return this.judgesService.updateJudges(id, createJudgesDto);
   }
 
   @Delete(':id')
-  deleteJudges(@Param('id') id: string, @GetUser() user: User): Promise<void> {
+  deleteJudges(
+    @Res({ passthrough: true }) res: Response,
+    @Param('id') id: string,
+    @GetUser() user: User,
+  ): Promise<void> {
     this.logger.verbose(`User "${user.username}" delete judges id: ${id}`);
+    res.status(HttpStatus.NO_CONTENT);
     return this.judgesService.deleteJudges(id);
   }
 }
