@@ -11,6 +11,8 @@ async function bootstrap() {
   const logger = new Logger();
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+
   const config = swaggerConfig;
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
