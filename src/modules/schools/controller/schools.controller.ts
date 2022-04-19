@@ -5,7 +5,9 @@ import {
   Get,
   Param,
   Post,
-  Patch,
+  HttpStatus,
+  Res,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -15,6 +17,7 @@ import { User } from '../../../database/entities/user.entity';
 import { Schools } from '../../../database/entities/schools.entity';
 import { SchoolsService } from '../service/schools.service';
 import { Logger } from '@nestjs/common';
+import { Response } from 'express';
 
 @Controller('schools')
 @UseGuards(AuthGuard())
@@ -27,18 +30,24 @@ export class SchoolsController {
   createSchools(
     @Body() createSchoolsDto: CreateSchoolsDto,
     @GetUser() user: User,
+    @Res({ passthrough: true }) res: Response,
   ): Promise<Schools> {
     this.logger.verbose(
       `User "${user.username}" create a new schools. Schools: ${JSON.stringify(
         createSchoolsDto,
       )}`,
     );
+    res.status(HttpStatus.CREATED);
     return this.schoolsService.createSchools(createSchoolsDto);
   }
 
   @Get()
-  findAllSchools(@GetUser() user: User): Promise<Schools[]> {
+  findAllSchools(
+    @Res({ passthrough: true }) res: Response,
+    @GetUser() user: User,
+  ): Promise<Schools[]> {
     this.logger.verbose(`User "${user.username}" find all schools.`);
+    res.status(HttpStatus.OK);
     return this.schoolsService.findAllSchools();
   }
 
@@ -46,24 +55,33 @@ export class SchoolsController {
   findOneSchools(
     @Param('id') id: string,
     @GetUser() user: User,
+    @Res({ passthrough: true }) res: Response,
   ): Promise<Schools> {
     this.logger.verbose(`User "${user.username}" find one schools id: ${id}`);
+    res.status(HttpStatus.OK);
     return this.schoolsService.findOneSchools(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   updateSchools(
     @GetUser() user: User,
     @Param('id') id: string,
     @Body() createSchoolsDto: CreateSchoolsDto,
+    @Res({ passthrough: true }) res: Response,
   ): Promise<Schools> {
     this.logger.verbose(`User "${user.username}" update schools id: ${id}`);
+    res.status(HttpStatus.OK);
     return this.schoolsService.updateSchools(id, createSchoolsDto);
   }
 
   @Delete(':id')
-  deleteSchools(@Param('id') id: string, @GetUser() user: User): Promise<void> {
+  deleteSchools(
+    @Param('id') id: string,
+    @Res({ passthrough: true }) res: Response,
+    @GetUser() user: User,
+  ): Promise<void> {
     this.logger.verbose(`User "${user.username}" delete schools id: ${id}`);
+    res.status(HttpStatus.NO_CONTENT);
     return this.schoolsService.deleteSchools(id);
   }
 }
