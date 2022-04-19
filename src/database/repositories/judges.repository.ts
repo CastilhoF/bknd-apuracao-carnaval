@@ -14,7 +14,7 @@ export class JudgesRepository extends Repository<Judges> {
   private logger = new Logger('JudgesRepository');
 
   async createJudges(createJudgesDto: CreateJudgesDto): Promise<Judges> {
-    const { name, question_id } = createJudgesDto;
+    const { name } = createJudgesDto;
 
     const date = new Date();
 
@@ -22,7 +22,7 @@ export class JudgesRepository extends Repository<Judges> {
 
     const updatedAt = FormatDateAndTime(date);
 
-    const judges = this.create({ name, question_id, createdAt, updatedAt });
+    const judges = this.create({ name, createdAt, updatedAt });
 
     try {
       return await this.save(judges);
@@ -57,7 +57,7 @@ export class JudgesRepository extends Repository<Judges> {
     id: string,
     createJudgesDto: CreateJudgesDto,
   ): Promise<Judges> {
-    const { name, question_id } = createJudgesDto;
+    const { name } = createJudgesDto;
 
     const date = new Date();
 
@@ -76,7 +76,6 @@ export class JudgesRepository extends Repository<Judges> {
     }
 
     judges.name = name;
-    judges.question_id = question_id;
     judges.updatedAt = updatedAt;
 
     return await this.save(judges);
