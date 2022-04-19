@@ -14,6 +14,7 @@ export const TypeOrmConfig: TypeOrmModuleAsyncOptions = {
       database: configService.get('DB_MYSQL'),
       autoLoadEntities: true,
       synchronize: true,
+      logging: true,
     };
   },
 };
