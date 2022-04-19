@@ -3,26 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Judges } from '../../../database/entities/judges.entity';
 import { CreateJudgesDto } from '../../../modules/judges/dtos/create.judges.dto';
 import { JudgesRepository } from '../../../database/repositories/judges.repository';
-import { QuestionsRepository } from '../../../database/repositories/question.repository';
 
 @Injectable()
 export class JudgesService {
   constructor(
     @InjectRepository(JudgesRepository)
     private judgesRepository: JudgesRepository,
-    private questionsRepository: QuestionsRepository,
   ) {}
 
   async createJudges(createJudgesDto: CreateJudgesDto): Promise<Judges> {
-    const found = await this.questionsRepository.findOneQuestion(
-      createJudgesDto.question_id,
-    );
-
-    if (!found) {
-      throw new NotFoundException(
-        `Group with ID "${createJudgesDto.question_id}" not found`,
-      );
-    }
     return this.judgesRepository.createJudges(createJudgesDto);
   }
 
