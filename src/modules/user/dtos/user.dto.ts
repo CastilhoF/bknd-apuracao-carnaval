@@ -3,7 +3,7 @@ import { IsString, MinLength, MaxLength, Matches } from 'class-validator';
 export class UserCredentialsDto {
   @IsString()
   @MinLength(4, { message: 'User must contain more than 4 characters.' })
-  @MaxLength(20, { message: 'The User must contain up to 20 characters.' })
+  @MaxLength(255, { message: 'The User must contain up to 255 characters.' })
   username: string;
 
   @IsString()
