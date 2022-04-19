@@ -6,9 +6,10 @@ export const configEnvironmentsValidation = Joi.object({
   PORT: Joi.number().required(),
   HOST_MYSQL: Joi.string(),
   PORT_MYSQL: Joi.number(),
-  USER_MYSQ: Joi.string(),
+  USER_MYSQL: Joi.string(),
   PWD_MYSQL: Joi.string(),
   DB_MYSQL: Joi.string(),
+  LOGGING_MYSQL: Joi.boolean(),
   JWT_SECRET: Joi.string().required(),
   JWT_EXPIRES: Joi.number().required(),
 });
