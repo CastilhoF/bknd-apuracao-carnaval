@@ -18,7 +18,7 @@ export class Event {
   name: string;
 
   @Column()
-  city_name: string;
+  city: string;
 
   @Column()
   year: number;
