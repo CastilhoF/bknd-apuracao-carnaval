@@ -5,5 +5,5 @@ export class CreateSchoolsDto {
   name: string;
 
   @IsNotEmpty()
-  group_id: string;
+  city_name: string;
 }

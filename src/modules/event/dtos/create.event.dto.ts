@@ -5,5 +5,20 @@ export class CreateEventDto {
   name: string;
 
   @IsNotEmpty()
-  location: string;
+  city_name: string;
+
+  @IsNotEmpty()
+  year: number;
+
+  @IsNotEmpty()
+  champions: number;
+
+  @IsNotEmpty()
+  demotes: number;
+
+  @IsNotEmpty()
+  discard_min: boolean;
+
+  @IsNotEmpty()
+  discard_max: boolean;
 }

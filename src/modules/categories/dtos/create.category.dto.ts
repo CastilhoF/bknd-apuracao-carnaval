@@ -1,9 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateGroupDto {
+export class CreateCategoryDto {
   @IsNotEmpty()
   name: string;
-
-  @IsNotEmpty()
-  event_id: string;
 }

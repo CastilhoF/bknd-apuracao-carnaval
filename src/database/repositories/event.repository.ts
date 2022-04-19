@@ -14,7 +14,15 @@ export class EventRepository extends Repository<Event> {
   private logger = new Logger('EventRepository');
 
   async createEvent(createEventDto: CreateEventDto): Promise<Event> {
-    const { name, location } = createEventDto;
+    const {
+      name,
+      city_name,
+      year,
+      champions,
+      demotes,
+      discard_min,
+      discard_max,
+    } = createEventDto;
 
     const date = new Date();
 
@@ -22,7 +30,17 @@ export class EventRepository extends Repository<Event> {
 
     const updatedAt = FormatDateAndTime(date);
 
-    const event = this.create({ name, location, createdAt, updatedAt });
+    const event = this.create({
+      name,
+      city_name,
+      year,
+      champions,
+      demotes,
+      discard_min,
+      discard_max,
+      createdAt,
+      updatedAt,
+    });
 
     try {
       return await this.save(event);
@@ -57,16 +75,19 @@ export class EventRepository extends Repository<Event> {
     id: string,
     createEventDto: CreateEventDto,
   ): Promise<Event> {
-    const { name, location } = createEventDto;
+    const {
+      name,
+      city_name,
+      year,
+      champions,
+      demotes,
+      discard_min,
+      discard_max,
+    } = createEventDto;
 
     const date = new Date();
 
     const updatedAt = FormatDateAndTime(date);
-
-    if (!id) {
-      this.logger.error(`Event id is required.`);
-      throw new NotFoundException(`No id provided!`);
-    }
 
     const event = await this.findOne(id);
 
@@ -76,10 +97,19 @@ export class EventRepository extends Repository<Event> {
     }
 
     event.name = name;
-    event.location = location;
+    event.city_name = city_name;
+    event.year = year;
+    event.champions = champions;
+    event.demotes = demotes;
+    event.discard_min = discard_min;
+    event.discard_max = discard_max;
     event.updatedAt = updatedAt;
 
-    return await this.save(event);
+    try {
+      return await this.save(event);
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
   }
 
   async deleteEvent(id: string): Promise<void> {

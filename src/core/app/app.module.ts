@@ -5,11 +5,10 @@ import { UserModule } from '../../modules/user/module/user.module';
 import { configEnvironmentsValidation } from '../config/validations/config.env.validation';
 import { TypeOrmConfig } from '../config/database/typeorm.config';
 import { EventModule } from '../../modules/event/module/event.module';
-import { GroupModule } from '../../modules/groups/module/groups.module';
 import { SchoolsModule } from '../../modules/schools/module/schools.module';
 import { JudgesModule } from '../../modules/judges/module/judges.module';
-import { QuestionsModule } from '../../modules/questions/module/questions.module';
-import { VerificationModule } from '../../modules/verification/module/verification.module';
+import { NotesModule } from 'src/modules/notes/module/notes.module';
+import { CategoryModule } from 'src/modules/categories/module/category.module';
 
 @Module({
   imports: [
@@ -20,11 +19,10 @@ import { VerificationModule } from '../../modules/verification/module/verificati
     TypeOrmModule.forRootAsync(TypeOrmConfig),
     UserModule,
     EventModule,
-    GroupModule,
     SchoolsModule,
     JudgesModule,
-    QuestionsModule,
-    VerificationModule,
+    NotesModule,
+    CategoryModule,
   ],
 })
 export class AppModule {}
