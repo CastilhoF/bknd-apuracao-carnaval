@@ -5,11 +5,11 @@ export class Schools {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   name: string;
 
   @Column()
-  group_id: string;
+  city_name: string;
 
   @Column()
   createdAt: string;
