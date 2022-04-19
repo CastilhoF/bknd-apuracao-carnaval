@@ -5,7 +5,9 @@ import {
   Get,
   Param,
   Post,
-  Patch,
+  HttpStatus,
+  Res,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -15,6 +17,7 @@ import { User } from '../../../database/entities/user.entity';
 import { Event } from '../../../database/entities/event.entity';
 import { EventService } from '../service/event.service';
 import { Logger } from '@nestjs/common';
+import { Response } from 'express';
 
 @Controller('events')
 @UseGuards(AuthGuard())
@@ -27,40 +30,58 @@ export class EventController {
   createEvent(
     @Body() createEventDto: CreateEventDto,
     @GetUser() user: User,
+    @Res({ passthrough: true }) res: Response,
   ): Promise<Event> {
     this.logger.verbose(
       `User "${user.username}" create a new event. Event: ${JSON.stringify(
         createEventDto,
       )}`,
     );
+    res.status(HttpStatus.CREATED);
     return this.eventService.createEvent(createEventDto);
   }
 
   @Get()
-  findAllEvents(@GetUser() user: User): Promise<Event[]> {
+  findAllEvents(
+    @Res({ passthrough: true }) res: Response,
+    @GetUser() user: User,
+  ): Promise<Event[]> {
     this.logger.verbose(`User "${user.username}" find all events.`);
+    res.status(HttpStatus.OK);
     return this.eventService.findAllEvents();
   }
 
   @Get(':id')
-  findOneEvent(@Param('id') id: string, @GetUser() user: User): Promise<Event> {
+  findOneEvent(
+    @Res({ passthrough: true }) res: Response,
+    @Param('id') id: string,
+    @GetUser() user: User,
+  ): Promise<Event> {
     this.logger.verbose(`User "${user.username}" find one event id: ${id}`);
+    res.status(HttpStatus.OK);
     return this.eventService.findOneEvent(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   updateEvent(
+    @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
     @Param('id') id: string,
     @Body() createEventDto: CreateEventDto,
   ): Promise<Event> {
     this.logger.verbose(`User "${user.username}" update event id: ${id}`);
+    res.status(HttpStatus.OK);
     return this.eventService.updateEvent(id, createEventDto);
   }
 
   @Delete(':id')
-  deleteEvent(@GetUser() user: User, @Param('id') id: string): Promise<void> {
+  deleteEvent(
+    @Res({ passthrough: true }) res: Response,
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ): Promise<void> {
     this.logger.verbose(`User "${user.username}" delete event id: ${id}`);
+    res.status(HttpStatus.NO_CONTENT);
     return this.eventService.deleteEvent(id);
   }
 }
