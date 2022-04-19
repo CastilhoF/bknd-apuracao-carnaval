@@ -5,7 +5,7 @@ export class CreateEventDto {
   name: string;
 
   @IsNotEmpty()
-  city_name: string;
+  city: string;
 
   @IsNotEmpty()
   year: number;
