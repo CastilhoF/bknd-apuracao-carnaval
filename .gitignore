@@ -37,3 +37,4 @@ lerna-debug.log*
 # Environments
 .stage.dev.env 
 .stage.prod.env 
+node_modules
