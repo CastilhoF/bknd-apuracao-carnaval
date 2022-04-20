@@ -1,9 +1,4 @@
-import {
-  EntityRepository,
-  FindManyOptions,
-  FindOneOptions,
-  Repository,
-} from 'typeorm';
+import { EntityRepository, FindManyOptions, Repository } from 'typeorm';
 import { Event } from '../entities/event.entity';
 import { CreateEventDto } from '../../modules/event/dtos/create.event.dto';
 import {
