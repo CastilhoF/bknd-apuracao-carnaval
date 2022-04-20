@@ -108,7 +108,7 @@ export class CategoryItemRepository extends Repository<CategoryItem> {
 
     if (!categoryItem) {
       this.logger.error(`CategoryItem id "${id}" not found.`);
-      throw new NotFoundException(`CategoryItem with ID "${id}" not found`);
+      throw new BadRequestException(`CategoryItem with ID "${id}" not found`);
     }
 
     categoryItem.category = category;

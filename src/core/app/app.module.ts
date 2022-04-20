@@ -7,8 +7,9 @@ import { TypeOrmConfig } from '../config/database/typeorm.config';
 import { EventModule } from '../../modules/event/module/event.module';
 import { SchoolsModule } from '../../modules/schools/module/schools.module';
 import { JudgesModule } from '../../modules/judges/module/judges.module';
-import { NotesModule } from 'src/modules/notes/module/notes.module';
-import { CategoryModule } from 'src/modules/categories/module/category.module';
+import { NotesModule } from '../../modules/notes/module/notes.module';
+import { CategoryModule } from '../../modules/categories/module/category.module';
+import { PenaltiesModule } from '../../modules/penalties/module/penalties.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CategoryModule } from 'src/modules/categories/module/category.module';
     JudgesModule,
     NotesModule,
     CategoryModule,
+    PenaltiesModule,
   ],
 })
 export class AppModule {}
