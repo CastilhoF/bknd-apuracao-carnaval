@@ -78,31 +78,31 @@ export class PenaltiesRepository extends Repository<Penalties> {
     return await this.findOne(findOneOptions);
   }
 
-  // async updatePenalties(
-  //   id: string,
-  //   createPenaltiesDto: CreatePenaltiesDto,
-  // ): Promise<Penalties> {
-  //   const { school, value } = createPenaltiesDto;
+  async updatePenalties(
+    id: string,
+    createPenaltiesDto: CreatePenaltiesDto,
+  ): Promise<Penalties> {
+    const { school, value } = createPenaltiesDto;
 
-  //   const updatedAt = FormatDateAndTime(new Date());
+    const updatedAt = FormatDateAndTime(new Date());
 
-  //   const penalties = await this.findPenaltiesById(id);
+    const penalties = await this.findPenaltiesById(id);
 
-  //   if (!penalties) {
-  //     this.logger.error(`Penalty id "${id}" not exists.`);
-  //     throw new BadRequestException('Penalty not exists');
-  //   }
+    if (!penalties) {
+      this.logger.error(`Penalty id "${id}" not exists.`);
+      throw new BadRequestException('Penalty not exists');
+    }
 
-  //   penalties.school = school;
-  //   penalties.value = value;
-  //   penalties.updatedAt = updatedAt;
+    penalties.school = school;
+    penalties.value = value;
+    penalties.updatedAt = updatedAt;
 
-  //   try {
-  //     return await this.save(penalties);
-  //   } catch (error) {
-  //     throw new InternalServerErrorException();
-  //   }
-  // }
+    try {
+      return await this.save(penalties);
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
 
   // async deletePenalties(id: string): Promise<void> {
   //   const result = await this.delete(id);
