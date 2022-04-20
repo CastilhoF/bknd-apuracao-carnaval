@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumberString } from 'class-validator';
 import { Schools } from '../../../database/entities/schools.entity';
 import { Event } from '../../../database/entities/event.entity';
 
@@ -9,6 +9,6 @@ export class CreatePenaltiesDto {
   @IsNotEmpty()
   school: Schools;
 
-  @IsNotEmpty()
+  @IsNumberString()
   value: number;
 }

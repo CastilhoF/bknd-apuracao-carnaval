@@ -1,9 +1,4 @@
-import {
-  EntityRepository,
-  Repository,
-  Connection,
-  FindManyOptions,
-} from 'typeorm';
+import { EntityRepository, Repository, Connection } from 'typeorm';
 import { Penalties } from '../entities/penalties.entity';
 import { CreatePenaltiesDto } from '../../modules/penalties/dtos/create.penalties.dto';
 import {
@@ -74,18 +69,16 @@ export class PenaltiesRepository extends Repository<Penalties> {
   }
 
   async findAllPenalties(): Promise<Penalties[]> {
-    const findOneOptions: FindManyOptions<Penalties> = {
-      relations: ['school', 'event'],
-    };
-    return await this.find(findOneOptions);
+    return await this.find();
   }
 
   async findPenaltiesById(id: string): Promise<Penalties> {
-    const findOneOptions: FindManyOptions<Penalties> = {
-      relations: ['school', 'event'],
-      where: { id },
-    };
-    return await this.findOne(findOneOptions);
+    const found = await this.findOne(id);
+    if (!found) {
+      this.logger.error(`Penalty id "${id}" not found.`);
+      throw new BadRequestException(`Penalty with ID "${id}" not found`);
+    }
+    return found;
   }
 
   async updatePenalties(
@@ -94,9 +87,17 @@ export class PenaltiesRepository extends Repository<Penalties> {
   ): Promise<Penalties> {
     const { school, value } = createPenaltiesDto;
 
+    if (!school.id) {
+      throw new BadRequestException('School are required');
+    }
+
+    if (!value) {
+      throw new BadRequestException('Value are required');
+    }
+
     const updatedAt = FormatDateAndTime(new Date());
 
-    const penalties = await this.findPenaltiesById(id);
+    const penalties = await this.findOne(id);
 
     if (!penalties) {
       this.logger.error(`Penalty id "${id}" not exists.`);

@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Schools } from './schools.entity';
 import { Event } from './event.entity';
 
@@ -16,8 +10,7 @@ export class Penalties {
   @ManyToOne((_type) => Event, (event) => event.penalties)
   event: Event;
 
-  @JoinColumn({ name: 'school_id' })
-  @ManyToOne((_type) => Schools, (schools) => schools.id, { eager: true })
+  @ManyToOne((_type) => Schools, (school) => school.id, { eager: true })
   school: Schools;
 
   @Column()
