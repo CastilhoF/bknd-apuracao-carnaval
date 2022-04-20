@@ -17,13 +17,13 @@ export class PenaltiesService {
     return this.penaltiesRepository.createPenalties(createPenaltiesDto);
   }
 
-  // async findAllPenalties(): Promise<Penalties[]> {
-  //   return this.penaltiesRepository.findAllPenalties();
-  // }
+  async findAllPenalties(): Promise<Penalties[]> {
+    return this.penaltiesRepository.findAllPenalties();
+  }
 
-  // async findOnePenalties(id: string): Promise<Penalties> {
-  //   return await this.penaltiesRepository.findPenaltiesById(id);
-  // }
+  async findOnePenalties(id: string): Promise<Penalties> {
+    return await this.penaltiesRepository.findPenaltiesById(id);
+  }
 
   // async updatePenalties(
   //   id: string,
