@@ -25,15 +25,15 @@ export class PenaltiesService {
     return await this.penaltiesRepository.findPenaltiesById(id);
   }
 
-  // async updatePenalties(
-  //   id: string,
-  //   createPenaltiesDto: CreatePenaltiesDto,
-  // ): Promise<Penalties> {
-  //   return await this.penaltiesRepository.updatePenalties(
-  //     id,
-  //     createPenaltiesDto,
-  //   );
-  // }
+  async updatePenalties(
+    id: string,
+    createPenaltiesDto: CreatePenaltiesDto,
+  ): Promise<Penalties> {
+    return await this.penaltiesRepository.updatePenalties(
+      id,
+      createPenaltiesDto,
+    );
+  }
 
   // async deletePenalties(id: string): Promise<void> {
   //   return this.penaltiesRepository.deletePenalties(id);
