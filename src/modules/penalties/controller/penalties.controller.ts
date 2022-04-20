@@ -41,28 +41,28 @@ export class PenaltiesController {
     return this.penaltiesService.createPenalties(createPenaltiesDto);
   }
 
-  // @Get()
-  // findAllPenalties(
-  //   @GetUser() user: User,
-  //   @Res({ passthrough: true }) res: Response,
-  // ): Promise<Penalties[]> {
-  //   this.logger.verbose(`User "${user.username}" retrieving all penalties.`);
-  //   res.status(HttpStatus.OK);
-  //   return this.penaltiesService.findAllPenalties();
-  // }
+  @Get()
+  findAllPenalties(
+    @GetUser() user: User,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<Penalties[]> {
+    this.logger.verbose(`User "${user.username}" retrieving all penalties.`);
+    res.status(HttpStatus.OK);
+    return this.penaltiesService.findAllPenalties();
+  }
 
-  // @Get('/:id')
-  // findOnePenalties(
-  //   @Res({ passthrough: true }) res: Response,
-  //   @GetUser() user: User,
-  //   @Param('id') id: string,
-  // ): Promise<Penalties> {
-  //   this.logger.verbose(
-  //     `User "${user.username}" retrieving penalties "${id}".`,
-  //   );
-  //   res.status(HttpStatus.OK);
-  //   return this.penaltiesService.findOnePenalties(id);
-  // }
+  @Get('/:id')
+  findOnePenalties(
+    @Res({ passthrough: true }) res: Response,
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ): Promise<Penalties> {
+    this.logger.verbose(
+      `User "${user.username}" retrieving penalties "${id}".`,
+    );
+    res.status(HttpStatus.OK);
+    return this.penaltiesService.findOnePenalties(id);
+  }
 
   // @Put('/:id')
   // updatePenalties(
