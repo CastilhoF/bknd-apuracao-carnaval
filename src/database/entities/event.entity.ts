@@ -1,13 +1,7 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  JoinColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Penalties } from './penalties.entity';
 import { CategoryItem } from './category.item.entity';
 import { Notes } from './notes.entity';
-import { Schools } from './schools.entity';
 
 @Entity()
 export class Event {
@@ -35,19 +29,18 @@ export class Event {
   @Column()
   discard_max: boolean;
 
-  @JoinColumn({ name: 'category_item_id' })
-  @OneToMany((_type) => CategoryItem, (categoryItem) => categoryItem.id, {
-    cascade: true,
+  @OneToMany((_type) => CategoryItem, (categoryItem) => categoryItem.event, {
+    eager: true,
   })
   categoryItem: CategoryItem[];
 
-  @JoinColumn({ name: 'school_id' })
-  @OneToMany((_type) => Schools, (school) => school.id, { cascade: true })
-  schools: Schools[];
-
-  @JoinColumn({ name: 'notes_id' })
-  @OneToMany((_types) => Notes, (notes) => notes.id, { cascade: true })
+  @OneToMany((_types) => Notes, (notes) => notes.event, { eager: true })
   notes: Notes[];
+
+  @OneToMany((_types) => Penalties, (penalties) => penalties.event, {
+    eager: true,
+  })
+  penalties: Penalties[];
 
   @Column()
   createdAt: string;

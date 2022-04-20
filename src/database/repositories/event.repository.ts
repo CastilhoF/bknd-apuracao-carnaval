@@ -1,4 +1,9 @@
-import { EntityRepository, Repository } from 'typeorm';
+import {
+  EntityRepository,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { Event } from '../entities/event.entity';
 import { CreateEventDto } from '../../modules/event/dtos/create.event.dto';
 import {
@@ -47,7 +52,20 @@ export class EventRepository extends Repository<Event> {
   }
 
   async findAllEvents(): Promise<Event[]> {
-    return await this.find();
+    const findOneOptions: FindManyOptions = {
+      relations: [
+        'notes',
+        'notes.judge',
+        'notes.school',
+        'notes.category',
+        'categoryItem',
+        'categoryItem.category',
+        'categoryItem.judges',
+        'penalties',
+        'penalties.school',
+      ],
+    };
+    return await this.find(findOneOptions);
   }
 
   async findOneEvent(id: string): Promise<Event> {

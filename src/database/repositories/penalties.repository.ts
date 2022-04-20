@@ -15,21 +15,28 @@ import {
 import { FormatDateAndTime } from '../../utils/format.date';
 import { Logger } from '@nestjs/common';
 import { Schools } from '../entities/schools.entity';
+import { Event } from '../entities/event.entity';
 
 @EntityRepository(Penalties)
 export class PenaltiesRepository extends Repository<Penalties> {
   private logger = new Logger('PenaltiesRepository');
   private schoolsRepository: Repository<Schools>;
+  private eventRepository: Repository<Event>;
 
   constructor(private connection: Connection) {
     super();
     this.schoolsRepository = this.connection.getRepository<Schools>(Schools);
+    this.eventRepository = this.connection.getRepository<Event>(Event);
   }
 
   async createPenalties(
     createPenaltiesDto: CreatePenaltiesDto,
   ): Promise<Penalties> {
-    const { school, value } = createPenaltiesDto;
+    const { event, school, value } = createPenaltiesDto;
+
+    if (!event.id) {
+      throw new BadRequestException('Event are required');
+    }
 
     if (!school.id) {
       throw new BadRequestException('School are required');
@@ -43,9 +50,12 @@ export class PenaltiesRepository extends Repository<Penalties> {
 
     const updatedAt = FormatDateAndTime(new Date());
 
+    const eventObj = await this.eventRepository.findOne(event.id);
+
     const schoolObj = await this.schoolsRepository.findOne(school.id);
 
-    const penalties = this.create({
+    const penalty = this.create({
+      event: eventObj,
       school: schoolObj,
       value,
       createdAt,
@@ -53,7 +63,7 @@ export class PenaltiesRepository extends Repository<Penalties> {
     });
 
     try {
-      return await this.save(penalties);
+      return await this.save(penalty);
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') {
         throw new ConflictException('Category name already exists');
@@ -65,14 +75,14 @@ export class PenaltiesRepository extends Repository<Penalties> {
 
   async findAllPenalties(): Promise<Penalties[]> {
     const findOneOptions: FindManyOptions<Penalties> = {
-      relations: ['school'],
+      relations: ['school', 'event'],
     };
     return await this.find(findOneOptions);
   }
 
   async findPenaltiesById(id: string): Promise<Penalties> {
     const findOneOptions: FindManyOptions<Penalties> = {
-      relations: ['school'],
+      relations: ['school', 'event'],
       where: { id },
     };
     return await this.findOne(findOneOptions);

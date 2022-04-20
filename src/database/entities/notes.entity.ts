@@ -16,19 +16,18 @@ export class Notes {
   id: string;
 
   @JoinColumn({ name: 'judge_id' })
-  @ManyToOne((_type) => Judges, { cascade: true })
+  @ManyToOne((_type) => Judges, { eager: true })
   judge: Judges;
 
   @JoinColumn({ name: 'school_id' })
-  @ManyToOne((_type) => Schools, { cascade: true })
+  @ManyToOne((_type) => Schools, { eager: true })
   school: Schools;
 
   @JoinColumn({ name: 'category_id' })
-  @ManyToOne((_type) => Category, { cascade: true })
+  @ManyToOne((_type) => Category, (category) => category.id, { eager: true })
   category: Category;
 
-  @JoinColumn({ name: 'event_id' })
-  @ManyToOne((_type) => Event, { cascade: true })
+  @ManyToOne((_type) => Event, (event) => event.notes)
   event: Event;
 
   @Column()
