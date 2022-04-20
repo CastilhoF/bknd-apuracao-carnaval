@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
   ManyToMany,
   PrimaryGeneratedColumn,
@@ -16,7 +15,6 @@ export class CategoryItem {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @JoinColumn({ name: 'category_id' })
   @ManyToOne((_type) => Category, (category) => category.id, { eager: true })
   category: Category;
 
