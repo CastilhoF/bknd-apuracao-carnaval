@@ -17,15 +17,14 @@ export class CategoryItem {
   id: string;
 
   @JoinColumn({ name: 'category_id' })
-  @ManyToOne((_type) => Category, (category) => category.id, { cascade: true })
+  @ManyToOne((_type) => Category, (category) => category.id, { eager: true })
   category: Category;
 
   @JoinTable()
-  @ManyToMany((_type) => Judges, (judges) => judges.id, { cascade: true })
+  @ManyToMany((_type) => Judges, (judges) => judges.id, { eager: true })
   judges: Judges[];
 
-  @JoinColumn({ name: 'event_id' })
-  @ManyToOne((_type) => Event, (event) => event.id, { cascade: true })
+  @ManyToOne((_type) => Event, (event) => event.categoryItem)
   event: Event;
 
   @Column()
