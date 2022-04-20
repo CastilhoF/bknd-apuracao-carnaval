@@ -82,14 +82,14 @@ export class PenaltiesController {
     return this.penaltiesService.updatePenalties(id, createPenaltiesDto);
   }
 
-  // @Delete('/:id')
-  // deletePenalties(
-  //   @Res({ passthrough: true }) res: Response,
-  //   @GetUser() user: User,
-  //   @Param('id') id: string,
-  // ): Promise<void> {
-  //   this.logger.verbose(`User "${user.username}" deleting penalties "${id}".`);
-  //   res.status(HttpStatus.NO_CONTENT);
-  //   return this.penaltiesService.deletePenalties(id);
-  // }
+  @Delete('/:id')
+  deletePenalties(
+    @Res({ passthrough: true }) res: Response,
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ): Promise<void> {
+    this.logger.verbose(`User "${user.username}" deleting penalties "${id}".`);
+    res.status(HttpStatus.NO_CONTENT);
+    return this.penaltiesService.deletePenalties(id);
+  }
 }
