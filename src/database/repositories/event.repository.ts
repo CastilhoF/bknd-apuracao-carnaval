@@ -7,6 +7,7 @@ import {
 import { Event } from '../entities/event.entity';
 import { CreateEventDto } from '../../modules/event/dtos/create.event.dto';
 import {
+  BadRequestException,
   ConflictException,
   InternalServerErrorException,
   NotFoundException,
@@ -73,7 +74,7 @@ export class EventRepository extends Repository<Event> {
       const found = await this.findOne(id);
       if (!found) {
         this.logger.error(`Event id "${id}" not found.`);
-        throw new NotFoundException(`Event with ID "${id}" not found`);
+        throw new BadRequestException(`Event with ID "${id}" not found`);
       }
       return found;
     } catch (error) {
