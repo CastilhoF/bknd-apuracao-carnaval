@@ -63,20 +63,20 @@ export class PenaltiesRepository extends Repository<Penalties> {
     }
   }
 
-  // async findAllPenalties(): Promise<Penalties[]> {
-  //   const findOneOptions: FindManyOptions<Penalties> = {
-  //     relations: ['school'],
-  //   };
-  //   return await this.find(findOneOptions);
-  // }
+  async findAllPenalties(): Promise<Penalties[]> {
+    const findOneOptions: FindManyOptions<Penalties> = {
+      relations: ['school'],
+    };
+    return await this.find(findOneOptions);
+  }
 
-  // async findPenaltiesById(id: string): Promise<Penalties> {
-  //   const findOneOptions: FindManyOptions<Penalties> = {
-  //     relations: ['school'],
-  //     where: { id },
-  //   };
-  //   return await this.findOne(findOneOptions);
-  // }
+  async findPenaltiesById(id: string): Promise<Penalties> {
+    const findOneOptions: FindManyOptions<Penalties> = {
+      relations: ['school'],
+      where: { id },
+    };
+    return await this.findOne(findOneOptions);
+  }
 
   // async updatePenalties(
   //   id: string,
