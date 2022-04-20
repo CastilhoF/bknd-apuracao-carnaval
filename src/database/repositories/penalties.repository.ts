@@ -104,10 +104,10 @@ export class PenaltiesRepository extends Repository<Penalties> {
     }
   }
 
-  // async deletePenalties(id: string): Promise<void> {
-  //   const result = await this.delete(id);
-  //   if (result.affected === 0) {
-  //     throw new NotFoundException('Penalty not found');
-  //   }
-  // }
+  async deletePenalties(id: string): Promise<void> {
+    const result = await this.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException('Penalty not found');
+    }
+  }
 }
