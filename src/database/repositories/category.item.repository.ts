@@ -89,11 +89,16 @@ export class CategoryItemRepository extends Repository<CategoryItem> {
   }
 
   async findOneCategoryItem(id: string): Promise<CategoryItem> {
-    const findOneOptions = {
-      relations: ['category', 'judges', 'event'],
-      where: { id },
-    };
-    return await this.findOne(findOneOptions);
+    try {
+      const found = await this.findOne(id);
+      if (!found) {
+        this.logger.error(`CategoryItem id "${id}" not found.`);
+        throw new BadRequestException(`CategoryItem with ID "${id}" not found`);
+      }
+      return found;
+    } catch (error) {
+      throw new BadRequestException(`CategoryItem with ID "${id}" not found`);
+    }
   }
 
   async updateCategoryItem(
