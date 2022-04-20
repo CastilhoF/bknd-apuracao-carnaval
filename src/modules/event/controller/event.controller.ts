@@ -20,13 +20,13 @@ import { Logger } from '@nestjs/common';
 import { Response } from 'express';
 
 @Controller('events')
-@UseGuards(AuthGuard())
 export class EventController {
   private logger = new Logger('EventController');
 
   constructor(private eventService: EventService) {}
 
   @Post()
+  @UseGuards(AuthGuard())
   createEvent(
     @Body() createEventDto: CreateEventDto,
     @GetUser() user: User,
@@ -44,9 +44,9 @@ export class EventController {
   @Get()
   findAllEvents(
     @Res({ passthrough: true }) res: Response,
-    @GetUser() user: User,
+    // @GetUser() user: User,
   ): Promise<Event[]> {
-    this.logger.verbose(`User "${user.username}" find all events.`);
+    // this.logger.verbose(`User "${user.username}" find all events.`);
     res.status(HttpStatus.OK);
     return this.eventService.findAllEvents();
   }
@@ -55,14 +55,15 @@ export class EventController {
   findOneEvent(
     @Res({ passthrough: true }) res: Response,
     @Param('id') id: string,
-    @GetUser() user: User,
+    // @GetUser() user: User,
   ): Promise<Event> {
-    this.logger.verbose(`User "${user.username}" find one event id: ${id}`);
+    // this.logger.verbose(`User "${user.username}" find one event id: ${id}`);
     res.status(HttpStatus.OK);
     return this.eventService.findOneEvent(id);
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard())
   updateEvent(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -75,6 +76,7 @@ export class EventController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard())
   deleteEvent(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
