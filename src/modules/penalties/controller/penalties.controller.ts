@@ -64,23 +64,23 @@ export class PenaltiesController {
     return this.penaltiesService.findOnePenalties(id);
   }
 
-  // @Put('/:id')
-  // updatePenalties(
-  //   @Res({ passthrough: true }) res: Response,
-  //   @GetUser() user: User,
-  //   @Param('id') id: string,
-  //   @Body() createPenaltiesDto: CreatePenaltiesDto,
-  // ): Promise<Penalties> {
-  //   this.logger.verbose(
-  //     `User "${
-  //       user.username
-  //     }" updating penalties "${id}". Data: ${JSON.stringify(
-  //       createPenaltiesDto,
-  //     )}`,
-  //   );
-  //   res.status(HttpStatus.OK);
-  //   return this.penaltiesService.updatePenalties(id, createPenaltiesDto);
-  // }
+  @Put('/:id')
+  updatePenalties(
+    @Res({ passthrough: true }) res: Response,
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Body() createPenaltiesDto: CreatePenaltiesDto,
+  ): Promise<Penalties> {
+    this.logger.verbose(
+      `User "${
+        user.username
+      }" updating penalties "${id}". Data: ${JSON.stringify(
+        createPenaltiesDto,
+      )}`,
+    );
+    res.status(HttpStatus.OK);
+    return this.penaltiesService.updatePenalties(id, createPenaltiesDto);
+  }
 
   // @Delete('/:id')
   // deletePenalties(
