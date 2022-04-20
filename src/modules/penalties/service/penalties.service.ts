@@ -35,7 +35,7 @@ export class PenaltiesService {
     );
   }
 
-  // async deletePenalties(id: string): Promise<void> {
-  //   return this.penaltiesRepository.deletePenalties(id);
-  // }
+  async deletePenalties(id: string): Promise<void> {
+    return this.penaltiesRepository.deletePenalties(id);
+  }
 }
