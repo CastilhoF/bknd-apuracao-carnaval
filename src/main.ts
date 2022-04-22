@@ -18,12 +18,14 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   const configService: ConfigService = new ConfigService();
-  const PORT = configService.get('PORT');
-  const HOST = configService.get('HOST');
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new TransformInterceptor());
-  await app.listen(PORT, HOST);
-  logger.log(`Application listening on port: ${PORT} and host: ${HOST}`);
+  await app.listen(configService.get('PORT'), configService.get('HOST'));
+  logger.log(
+    `Application listening on port: ${configService.get(
+      'PORT',
+    )} and host: ${configService.get('HOST')}`,
+  );
 }
 bootstrap();
