@@ -86,6 +86,34 @@ export class EventController {
     return this.eventService.findOneEvent(id);
   }
 
+  @Get('delivery')
+  @ApiOperation({ summary: 'Get All Events' })
+  @ApiOkResponse({
+    description: 'Successfully',
+    type: [EventDto],
+  })
+  findAllEventsDelivery(
+    @Res({ passthrough: true }) res: Response,
+    // @GetUser() user: User,
+  ): Promise<Event[]> {
+    // this.logger.verbose(`User "${user.username}" find all events.`);
+    res.status(HttpStatus.OK);
+    return this.eventService.findAllEvents();
+  }
+
+  @Get('delivery/:id')
+  @ApiOperation({ summary: 'Get Event By ID' })
+  @ApiOkResponse({ description: 'Successfully', type: EventDto })
+  findOneEventDelivery(
+    @Res({ passthrough: true }) res: Response,
+    @Param('id') id: string,
+    // @GetUser() user: User,
+  ): Promise<Event> {
+    // this.logger.verbose(`User "${user.username}" find one event id: ${id}`);
+    res.status(HttpStatus.OK);
+    return this.eventService.findOneEvent(id);
+  }
+
   @Put(':id')
   @ApiOperation({ summary: 'Update Event By ID' })
   @ApiOkResponse({ description: 'Event Updated Successfully', type: EventDto })
