@@ -18,8 +18,18 @@ import { Schools } from '../../../database/entities/schools.entity';
 import { SchoolsService } from '../service/schools.service';
 import { Logger } from '@nestjs/common';
 import { Response } from 'express';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiNoContentResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { SchoolDto } from '../../../core/config/documentation/dtos/single-objects/school';
 
 @Controller('schools')
+@ApiTags('Schools')
 @UseGuards(AuthGuard())
 export class SchoolsController {
   private logger = new Logger('SchoolsController');
@@ -27,13 +37,20 @@ export class SchoolsController {
   constructor(private schoolsService: SchoolsService) {}
 
   @Post()
+  @ApiBody({ type: CreateSchoolsDto })
+  @ApiOperation({ summary: 'Create School' })
+  @ApiCreatedResponse({
+    description: `User "USERNAME" create a new school. School: { Create School Dto }`,
+    type: SchoolDto,
+  })
+  @ApiBody({ type: CreateSchoolsDto })
   createSchools(
     @Body() createSchoolsDto: CreateSchoolsDto,
     @GetUser() user: User,
     @Res({ passthrough: true }) res: Response,
   ): Promise<Schools> {
     this.logger.verbose(
-      `User "${user.username}" create a new schools. Schools: ${JSON.stringify(
+      `User "${user.username}" create a new school. School: ${JSON.stringify(
         createSchoolsDto,
       )}`,
     );
@@ -42,6 +59,8 @@ export class SchoolsController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Find All Schools' })
+  @ApiOkResponse({ description: 'Successfully', type: [SchoolDto] })
   findAllSchools(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -52,6 +71,8 @@ export class SchoolsController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Find School By ID' })
+  @ApiOkResponse({ description: 'Successfully', type: SchoolDto })
   findOneSchools(
     @Param('id') id: string,
     @GetUser() user: User,
@@ -63,6 +84,9 @@ export class SchoolsController {
   }
 
   @Put(':id')
+  @ApiBody({ type: SchoolDto })
+  @ApiOperation({ summary: 'Update School By ID' })
+  @ApiOkResponse({ description: 'Successfully' })
   updateSchools(
     @GetUser() user: User,
     @Param('id') id: string,
@@ -75,6 +99,11 @@ export class SchoolsController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete School By ID' })
+  @ApiNoContentResponse({
+    description: 'School Deleted Successfully',
+    type: SchoolDto,
+  })
   deleteSchools(
     @Param('id') id: string,
     @Res({ passthrough: true }) res: Response,
