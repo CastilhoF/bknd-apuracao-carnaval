@@ -1,4 +1,9 @@
-import { EntityRepository, FindManyOptions, Repository } from 'typeorm';
+import {
+  Connection,
+  EntityRepository,
+  FindManyOptions,
+  Repository,
+} from 'typeorm';
 import { Notes } from '../entities/notes.entity';
 import { CreateNoteDto } from 'src/modules/notes/dtos/create.note.dto';
 import {
@@ -9,12 +14,18 @@ import {
 } from '@nestjs/common';
 import { FormatDateAndTime } from '../../utils/format.date';
 import { Logger } from '@nestjs/common';
-import { EventRepository } from './event.repository';
+import { Event } from '../entities/event.entity';
+import { Schools } from '../entities/schools.entity';
 
 @EntityRepository(Notes)
 export class NotesRepository extends Repository<Notes> {
   private logger = new Logger('NotesRepository');
-  private eventRepository: EventRepository;
+  private eventRepository: Repository<Event>;
+
+  constructor(private connection: Connection) {
+    super();
+    this.eventRepository = connection.getRepository<Event>(Event);
+  }
 
   async createNote(createNoteDto: CreateNoteDto): Promise<Notes> {
     const { judge, school, category, event, value } = createNoteDto;
@@ -66,34 +77,9 @@ export class NotesRepository extends Repository<Notes> {
     }
   }
 
-  async createEventNotes(id: string): Promise<void> {
-    const createdAt = FormatDateAndTime(new Date());
-    const updatedAt = FormatDateAndTime(new Date());
-
-    const event = await this.eventRepository.findOneEvent(id);
-    const categoryItems = event.categoryItem;
-    const schoolsItem = event.penalties;
-
-    categoryItems.forEach((categoryItem) => {
-      categoryItem.judges.forEach((judge) => {
-        schoolsItem.forEach((shool) => {
-          this.create({
-            judge: judge,
-            school: shool,
-            category: categoryItem.category,
-            event: event,
-            createdAt,
-            updatedAt,
-            value: 0,
-          });
-        });
-      });
-    });
-  }
-
   async findAllNotes(): Promise<Notes[]> {
     const findOptions: FindManyOptions = {
-      relations: ['judge', 'school', 'category', 'event'],
+      relations: ['judge', 'school', 'category'],
     };
     return await this.find(findOptions);
   }
@@ -101,7 +87,7 @@ export class NotesRepository extends Repository<Notes> {
   async findOneNote(id: string): Promise<Notes> {
     try {
       const findOptions = {
-        relations: ['judge', 'school', 'category', 'event'],
+        relations: ['judge', 'school', 'category'],
         where: { id },
       };
       const found = await this.findOne(findOptions);
