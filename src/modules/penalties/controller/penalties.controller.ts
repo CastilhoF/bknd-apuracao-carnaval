@@ -18,8 +18,10 @@ import { Penalties } from '../../../database/entities/penalties.entity';
 import { Logger } from '@nestjs/common';
 import { PenaltiesService } from '../service/penalties.service';
 import { Response } from 'express';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
 @Controller('penalties')
+@ApiTags('Penalties')
 @UseGuards(AuthGuard())
 export class PenaltiesController {
   private logger = new Logger('PenaltiesController');
@@ -27,6 +29,7 @@ export class PenaltiesController {
   constructor(private readonly penaltiesService: PenaltiesService) {}
 
   @Post()
+  @ApiBody({ type: CreatePenaltiesDto })
   createPenalties(
     @Body() createPenaltiesDto: CreatePenaltiesDto,
     @GetUser() user: User,
