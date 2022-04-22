@@ -15,10 +15,6 @@ export class NotesService {
     return this.notesRepository.createNote(createNoteDto);
   }
 
-  async createAllNotesForEvent(id: string): Promise<void> {
-    return this.notesRepository.createEventNotes(id);
-  }
-
   async findAllNotes(): Promise<Notes[]> {
     return this.notesRepository.findAllNotes();
   }

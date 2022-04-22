@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumberString } from 'class-validator';
 import { Event } from '../../../database/entities/event.entity';
 import { Judges } from '../../../database/entities/judges.entity';
 import { Category } from '../../../database/entities/category.entity';
@@ -23,6 +23,7 @@ export class CreateNoteDto {
   event: Event;
 
   @IsNotEmpty()
+  @IsNumberString()
   @ApiProperty()
-  value: number;
+  value: string;
 }

@@ -35,7 +35,7 @@ export class Notes {
 
   @ApiProperty()
   @Column()
-  value: number;
+  value: string;
 
   @ApiProperty()
   @Column()
