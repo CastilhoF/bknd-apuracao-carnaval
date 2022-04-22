@@ -33,7 +33,7 @@ export class UserRepository extends Repository<User> {
       await this.save(user);
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') {
-        throw new ConflictException('Judges name already exists');
+        throw new ConflictException('Username already exists');
       } else {
         throw new InternalServerErrorException();
       }
