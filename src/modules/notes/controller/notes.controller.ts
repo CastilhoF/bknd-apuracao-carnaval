@@ -44,6 +44,19 @@ export class NotesController {
     return this.notesService.createNote(createNoteDto);
   }
 
+  @Post('/event/:id')
+  async createAllNotesForEvent(
+    @GetUser() user: User,
+    @Param('id') id: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<void> {
+    this.logger.verbose(
+      `User "${user.username}" creating all notes for event with ID "${id}".`,
+    );
+    res.status(HttpStatus.NO_CONTENT);
+    return this.notesService.createAllNotesForEvent(id);
+  }
+
   @Get()
   async findAllNotes(
     @Res({ passthrough: true }) res: Response,
