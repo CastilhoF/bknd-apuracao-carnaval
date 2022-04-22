@@ -27,7 +27,10 @@ export class CategoryItem {
   judges: Judges[];
 
   @ApiProperty()
-  @ManyToOne((_type) => Event, (event) => event.categoryItem)
+  @ManyToOne((_type) => Event, (event) => event.categoryItem, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
   event: Event;
 
   @ApiProperty()

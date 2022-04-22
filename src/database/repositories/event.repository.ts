@@ -117,9 +117,14 @@ export class EventRepository extends Repository<Event> {
 
     if (!event) {
       this.logger.error(`Event id "${id}" not found.`);
-      throw new NotFoundException(`Event with ID "${id}" not found`);
+      throw new BadRequestException(`Event with ID "${id}" not found`);
     }
 
-    await this.delete(event);
+    try {
+      await this.delete(id);
+    } catch (error) {
+      this.logger.error(`Error: ${error}`);
+      throw new InternalServerErrorException();
+    }
   }
 }
