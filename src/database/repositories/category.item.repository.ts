@@ -41,10 +41,6 @@ export class CategoryItemRepository extends Repository<CategoryItem> {
       throw new BadRequestException('Category are required');
     }
 
-    if (judges.length === 0) {
-      throw new BadRequestException('Judge are required');
-    }
-
     if (!event.id) {
       throw new BadRequestException('Event are required');
     }
@@ -56,10 +52,14 @@ export class CategoryItemRepository extends Repository<CategoryItem> {
     const categoryObj = await this.categoryRepository.findOne(category.id);
 
     const judgesArray = [];
-    judges.map(async (judge) => {
-      const result = await this.judgeRepository.findOne(judge.id);
-      judgesArray.push(result);
-    });
+
+    if (judges) {
+      judges.map(async (judge) => {
+        const result = await this.judgeRepository.findOne(judge.id);
+        judgesArray.push(result);
+      });
+    }
+
     const eventObj = await this.eventRepository.findOne(event.id);
 
     const categoryItem = this.create({

@@ -14,14 +14,24 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../user/decorators/get.user.decorator';
 import { User } from '../../../database/entities/user.entity';
 import { CreateCategoryDto } from '../dtos/create.category.dto';
+import { CreatedCategoryDto } from '../../../core/config/documentation/dtos/created/created.category.dto';
 import { Category } from '../../../database/entities/category.entity';
 import { CreateCategoryItemDto } from '../dtos/create.category.items.dto';
 import { CategoryItem } from '../../../database/entities/category.item.entity';
 import { Logger } from '@nestjs/common';
 import { CategoryService } from '../services/category.service';
 import { Response } from 'express';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { CreatedCategoryItemDto } from '../../../core/config/documentation/dtos/created//created.category.item.dto';
 
 @Controller('categories')
+@ApiTags('Categories')
 @UseGuards(AuthGuard())
 export class CategoryController {
   private logger = new Logger('CategoryController');
@@ -29,6 +39,12 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
+  @ApiBody({ type: CreateCategoryDto })
+  @ApiOperation({ summary: 'Create Category' })
+  @ApiCreatedResponse({
+    description: 'Category created',
+    type: CreatedCategoryDto,
+  })
   createCategory(
     @Body() createCategoryDto: CreateCategoryDto,
     @GetUser() user: User,
@@ -44,6 +60,12 @@ export class CategoryController {
   }
 
   @Post('items')
+  @ApiBody({ type: CreateCategoryItemDto })
+  @ApiOperation({ summary: 'Create Category Item' })
+  @ApiCreatedResponse({
+    description: 'Category Item Created',
+    type: CreatedCategoryItemDto,
+  })
   createCategoryItem(
     @Body() createCategoryItemDto: CreateCategoryItemDto,
     @GetUser() user: User,
@@ -59,6 +81,8 @@ export class CategoryController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all categories' })
+  @ApiOkResponse({ description: 'Successfully', type: [Category] })
   findAllCategories(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,

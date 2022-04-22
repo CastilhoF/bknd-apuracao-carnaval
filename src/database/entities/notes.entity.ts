@@ -9,12 +9,15 @@ import { Event } from './event.entity';
 import { Judges } from './judges.entity';
 import { Schools } from './schools.entity';
 import { Category } from './category.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Notes {
+  @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ApiProperty()
   @JoinColumn({ name: 'judge_id' })
   @ManyToOne((_type) => Judges, { eager: true })
   judge: Judges;
@@ -30,12 +33,15 @@ export class Notes {
   @ManyToOne((_type) => Event, (event) => event.notes)
   event: Event;
 
+  @ApiProperty()
   @Column()
   value: number;
 
+  @ApiProperty()
   @Column()
   createdAt: string;
 
+  @ApiProperty()
   @Column()
   updatedAt: string;
 }

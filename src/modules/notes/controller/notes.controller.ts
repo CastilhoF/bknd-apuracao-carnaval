@@ -17,8 +17,11 @@ import { Notes } from '../../../database/entities/notes.entity';
 import { NotesService } from '../service/notes.service';
 import { Logger } from '@nestjs/common';
 import { Response } from 'express';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { CreateNoteDto } from '../dtos/create.note.dto';
 
 @Controller('notes')
+@ApiTags('Notes')
 @UseGuards(AuthGuard())
 export class NotesController {
   private logger = new Logger('NotesController');
@@ -26,6 +29,7 @@ export class NotesController {
   constructor(private readonly notesService: NotesService) {}
 
   @Post()
+  @ApiBody({ type: CreateNoteDto })
   async createNote(
     @Body() createNoteDto: Notes,
     @GetUser() user: User,
