@@ -9,10 +9,12 @@ import {
 } from '@nestjs/common';
 import { FormatDateAndTime } from '../../utils/format.date';
 import { Logger } from '@nestjs/common';
+import { EventRepository } from './event.repository';
 
 @EntityRepository(Notes)
 export class NotesRepository extends Repository<Notes> {
   private logger = new Logger('NotesRepository');
+  private eventRepository: EventRepository;
 
   async createNote(createNoteDto: CreateNoteDto): Promise<Notes> {
     const { judge, school, category, event, value } = createNoteDto;
@@ -62,6 +64,31 @@ export class NotesRepository extends Repository<Notes> {
         throw new InternalServerErrorException();
       }
     }
+  }
+
+  async createEventNotes(id: string): Promise<void> {
+    const createdAt = FormatDateAndTime(new Date());
+    const updatedAt = FormatDateAndTime(new Date());
+
+    const event = await this.eventRepository.findOneEvent(id);
+    const categoryItems = event.categoryItem;
+    const schoolsItem = event.penalties;
+
+    categoryItems.forEach((categoryItem) => {
+      categoryItem.judges.forEach((judge) => {
+        schoolsItem.forEach((shool) => {
+          this.create({
+            judge: judge,
+            school: shool,
+            category: categoryItem.category,
+            event: event,
+            createdAt,
+            updatedAt,
+            value: 0,
+          });
+        });
+      });
+    });
   }
 
   async findAllNotes(): Promise<Notes[]> {
