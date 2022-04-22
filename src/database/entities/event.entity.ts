@@ -45,7 +45,9 @@ export class Event {
   categoryItem: CategoryItem[];
 
   @ApiProperty()
-  @OneToMany((_types) => Notes, (notes) => notes.event, { eager: true })
+  @OneToMany((_types) => Notes, (notes) => notes.event, {
+    eager: true,
+  })
   notes: Notes[];
 
   @ApiProperty()
