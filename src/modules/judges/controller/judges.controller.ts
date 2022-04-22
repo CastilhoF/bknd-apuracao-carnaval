@@ -18,8 +18,10 @@ import { Judges } from '../../../database/entities/judges.entity';
 import { JudgesService } from '../service/judges.service';
 import { Logger } from '@nestjs/common';
 import { Response } from 'express';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
 @Controller('judges')
+@ApiTags('Judges')
 @UseGuards(AuthGuard())
 export class JudgesController {
   private logger = new Logger('JudgesController');
@@ -27,6 +29,7 @@ export class JudgesController {
   constructor(private judgesService: JudgesService) {}
 
   @Post()
+  @ApiBody({ type: CreateJudgesDto })
   createJudges(
     @Body() createJudgesDto: CreateJudgesDto,
     @GetUser() user: User,
