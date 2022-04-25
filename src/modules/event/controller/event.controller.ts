@@ -40,7 +40,7 @@ export class EventController {
   @ApiBody({ type: CreateEventDto })
   @ApiOperation({ summary: 'Create Events. Ex. (Carnivals)' })
   @ApiCreatedResponse({
-    description: `User "USERNAME" create a new event. Event: { Created Event Dto }`,
+    description: `Event created successfully.`,
     type: CreatedEventDto,
   })
   @UseGuards(AuthGuard())
@@ -87,7 +87,7 @@ export class EventController {
   }
 
   @Get('delivery')
-  @ApiOperation({ summary: 'Get All Events' })
+  @ApiOperation({ summary: 'Get All Events. Obs.: Frontend specific use ' })
   @ApiOkResponse({
     description: 'Successfully',
     type: [EventDto],
@@ -102,7 +102,7 @@ export class EventController {
   }
 
   @Get('delivery/:id')
-  @ApiOperation({ summary: 'Get Event By ID' })
+  @ApiOperation({ summary: 'Get Event By ID. Obs.: Frontend specific use ' })
   @ApiOkResponse({ description: 'Successfully', type: EventDto })
   findOneEventDelivery(
     @Res({ passthrough: true }) res: Response,
