@@ -5,14 +5,21 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePenaltiesDto {
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Event object payload',
+  })
   event: Event;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'School object payload',
+  })
   school: Schools;
 
   @IsNumberString()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Penalty value',
+    example: ` "1" `,
+  })
   value: string;
 }
