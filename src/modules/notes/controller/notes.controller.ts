@@ -17,8 +17,17 @@ import { Notes } from '../../../database/entities/notes.entity';
 import { NotesService } from '../service/notes.service';
 import { Logger } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiNoContentResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateNoteDto } from '../dtos/create.note.dto';
+import { NotesDto } from '../../../core/config/documentation/dtos/single-objects/notes';
+import { CreatedNoteDto } from '../../../core/config/documentation/dtos/created/created.notes.dto';
 
 @Controller('notes')
 @ApiTags('Notes')
@@ -30,6 +39,11 @@ export class NotesController {
 
   @Post()
   @ApiBody({ type: CreateNoteDto })
+  @ApiOperation({ summary: 'Create Note' })
+  @ApiCreatedResponse({
+    description: `Note created as successfully`,
+    type: CreatedNoteDto,
+  })
   async createNote(
     @Body() createNoteDto: Notes,
     @GetUser() user: User,
@@ -45,6 +59,11 @@ export class NotesController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all notes' })
+  @ApiOkResponse({
+    description: 'All notes',
+    type: [NotesDto],
+  })
   async findAllNotes(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -55,6 +74,11 @@ export class NotesController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get a note by id' })
+  @ApiOkResponse({
+    description: 'The note',
+    type: NotesDto,
+  })
   async findOneNote(
     @Param('id') id: string,
     @GetUser() user: User,
@@ -68,6 +92,12 @@ export class NotesController {
   }
 
   @Put(':id')
+  @ApiBody({ type: NotesDto })
+  @ApiOperation({ summary: 'Update a note by id' })
+  @ApiOkResponse({
+    description: 'Note updated successfully',
+    type: NotesDto,
+  })
   async updateNote(
     @Param('id') id: string,
     @Body() createNoteDto: Notes,
@@ -84,6 +114,8 @@ export class NotesController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete a note by id' })
+  @ApiNoContentResponse({ description: 'Note deleted successfully' })
   async deleteNote(
     @Param('id') id: string,
     @GetUser() user: User,
