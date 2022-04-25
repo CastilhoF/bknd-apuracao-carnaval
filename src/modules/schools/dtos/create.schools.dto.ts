@@ -3,10 +3,16 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateSchoolsDto {
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'School name',
+    example: `Gaviões da Fiel`,
+  })
   name: string;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'School city',
+    example: `São Paulo`,
+  })
   city: string;
 }
