@@ -57,6 +57,51 @@ $ yarn test:cov
 $ docker-compose up --build -d
 ```
 
+## Host Production
+
+- Server - [Balder](https://service.ig.com.br/apuracao-carnaval-bknd/)
+```bash
+https://service.ig.com.br/apuracao-carnaval-bknd/
+```
+
+## Deploy
+
+<br>
+
+Access the Balder server via ssh terminal:
+
+```bash
+# Balder ssh access
+$ ssh -i ~/.ssh/chave_ig.pem ubuntu@10.0.35.122
+```
+
+<br>
+
+Enter the folder where the app is located:
+
+```bash
+# Command to enter the project folder inside the server
+$ cd /deploy/VAR/dominios/o-dia-backend-apuracao-carnaval/ 
+```
+
+<br>
+
+Run the git pull on the main branch:
+
+```bash
+# Pull in the repository
+$ git pull origin main
+```
+
+<br>
+
+Build docker via docker compose command:
+
+```bash
+# Docker Compose Command
+$ docker-compose -up --build -d
+```
+
 
 ## Stay in touch
 
@@ -65,6 +110,3 @@ $ docker-compose up --build -d
 - Website - [https://www.ig.com.br](https://www.ig.com.br)
 - Twitter - [@iG](https://twitter.com/iG)
 
-## License
-
-Nest is [MIT licensed](LICENSE).
