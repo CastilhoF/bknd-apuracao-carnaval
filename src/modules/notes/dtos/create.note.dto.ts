@@ -7,23 +7,34 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateNoteDto {
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Judge object payload',
+  })
   judge: Judges;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'School object payload',
+  })
   school: Schools;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Category object payload',
+  })
   category: Category;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Event object payload',
+  })
   event: Event;
 
   @IsNotEmpty()
   @IsNumberString()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Note value',
+    example: ` "1"`,
+  })
   value: string;
 }
