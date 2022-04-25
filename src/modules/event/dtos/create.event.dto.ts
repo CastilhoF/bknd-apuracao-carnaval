@@ -3,30 +3,51 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateEventDto {
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The event name.',
+    example: 'Carnaval 2022',
+  })
   name: string;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'City where the event will take place.',
+    example: 'São Paulo',
+  })
   city: string;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Year in which the event will take place.',
+    example: '2022',
+  })
   year: number;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Number of event champions',
+    example: '3',
+  })
   champions: number;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Number of demoted participants',
+    example: '2',
+  })
   demotes: number;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Discard minimum grade',
+    example: 'true',
+  })
   discard_min: boolean;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Discard maximum grade',
+    example: 'true',
+  })
   discard_max: boolean;
 }
