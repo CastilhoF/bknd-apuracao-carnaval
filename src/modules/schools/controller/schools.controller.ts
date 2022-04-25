@@ -27,6 +27,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { SchoolDto } from '../../../core/config/documentation/dtos/single-objects/school';
+import { CreatedSchoolDto } from '../../../core/config/documentation/dtos/created/created.school.dto';
 
 @Controller('schools')
 @ApiTags('Schools')
@@ -40,10 +41,9 @@ export class SchoolsController {
   @ApiBody({ type: CreateSchoolsDto })
   @ApiOperation({ summary: 'Create School' })
   @ApiCreatedResponse({
-    description: `User "USERNAME" create a new school. School: { Create School Dto }`,
-    type: SchoolDto,
+    description: `School as been created`,
+    type: CreatedSchoolDto,
   })
-  @ApiBody({ type: CreateSchoolsDto })
   createSchools(
     @Body() createSchoolsDto: CreateSchoolsDto,
     @GetUser() user: User,
@@ -86,7 +86,7 @@ export class SchoolsController {
   @Put(':id')
   @ApiBody({ type: SchoolDto })
   @ApiOperation({ summary: 'Update School By ID' })
-  @ApiOkResponse({ description: 'Successfully' })
+  @ApiOkResponse({ description: 'Successfully', type: SchoolDto })
   updateSchools(
     @GetUser() user: User,
     @Param('id') id: string,
@@ -102,7 +102,6 @@ export class SchoolsController {
   @ApiOperation({ summary: 'Delete School By ID' })
   @ApiNoContentResponse({
     description: 'School Deleted Successfully',
-    type: SchoolDto,
   })
   deleteSchools(
     @Param('id') id: string,

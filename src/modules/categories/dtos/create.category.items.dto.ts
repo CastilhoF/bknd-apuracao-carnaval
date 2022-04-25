@@ -2,17 +2,26 @@ import { IsNotEmpty } from 'class-validator';
 import { Category } from '../../../database/entities/category.entity';
 import { Event } from '../../../database/entities/event.entity';
 import { Judges } from '../../../database/entities/judges.entity';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateCategoryItemDto {
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The category payload object.',
+    example: 'CategoryDto',
+  })
   category: Category;
 
-  @ApiProperty()
+  @ApiPropertyOptional({
+    description: 'The array of judges payload object.',
+    example: ['JudgeDto'],
+  })
   judges: Judges[];
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The event payload object.',
+    example: 'EventDto',
+  })
   event: Event;
 }

@@ -16,9 +16,18 @@ import { CreateJudgesDto } from '../dtos/create.judges.dto';
 import { User } from '../../../database/entities/user.entity';
 import { Judges } from '../../../database/entities/judges.entity';
 import { JudgesService } from '../service/judges.service';
+import { JudgeDto } from '../../../core/config/documentation/dtos/single-objects/judge';
 import { Logger } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiNoContentResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { CreatedJudgeDto } from 'src/core/config/documentation/dtos/created/created.judge.dto';
 
 @Controller('judges')
 @ApiTags('Judges')
@@ -30,6 +39,11 @@ export class JudgesController {
 
   @Post()
   @ApiBody({ type: CreateJudgesDto })
+  @ApiOperation({ summary: 'Create a new judges' })
+  @ApiCreatedResponse({
+    description: `Judge created successfully`,
+    type: CreatedJudgeDto,
+  })
   createJudges(
     @Body() createJudgesDto: CreateJudgesDto,
     @GetUser() user: User,
@@ -45,6 +59,11 @@ export class JudgesController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Find all judges' })
+  @ApiOkResponse({
+    description: `Find all judges successfully`,
+    type: [JudgeDto],
+  })
   findAllJudges(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -55,35 +74,50 @@ export class JudgesController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Find one judges' })
+  @ApiOkResponse({
+    description: `Find one judge by id successfully`,
+    type: JudgeDto,
+  })
   findOneJudges(
     @Param('id') id: string,
     @GetUser() user: User,
     @Res({ passthrough: true }) res: Response,
   ): Promise<Judges> {
-    this.logger.verbose(`User "${user.username}" find one judges id: ${id}`);
+    this.logger.verbose(`User "${user.username}" find one judge id: ${id}`);
     res.status(HttpStatus.OK);
     return this.judgesService.findOneJudges(id);
   }
 
   @Put(':id')
+  @ApiBody({ type: JudgeDto })
+  @ApiOperation({ summary: 'Update one judge' })
+  @ApiOkResponse({
+    description: `Judges update successfully`,
+    type: JudgeDto,
+  })
   updateJudges(
     @GetUser() user: User,
     @Res({ passthrough: true }) res: Response,
     @Param('id') id: string,
     @Body() createJudgesDto: CreateJudgesDto,
   ): Promise<Judges> {
-    this.logger.verbose(`User "${user.username}" update judges id: ${id}`);
+    this.logger.verbose(`User "${user.username}" update judge id: ${id}`);
     res.status(HttpStatus.OK);
     return this.judgesService.updateJudges(id, createJudgesDto);
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete judge by ID' })
+  @ApiNoContentResponse({
+    description: `Delete judge successfully`,
+  })
   deleteJudges(
     @Res({ passthrough: true }) res: Response,
     @Param('id') id: string,
     @GetUser() user: User,
   ): Promise<void> {
-    this.logger.verbose(`User "${user.username}" delete judges id: ${id}`);
+    this.logger.verbose(`User "${user.username}" delete judge id: ${id}`);
     res.status(HttpStatus.NO_CONTENT);
     return this.judgesService.deleteJudges(id);
   }

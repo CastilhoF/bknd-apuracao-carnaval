@@ -3,6 +3,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateJudgesDto {
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The judge name.',
+    example: 'Fernando Castilho',
+  })
   name: string;
 }

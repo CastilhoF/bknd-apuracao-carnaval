@@ -24,11 +24,14 @@ import { Response } from 'express';
 import {
   ApiBody,
   ApiCreatedResponse,
+  ApiNoContentResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { CreatedCategoryItemDto } from '../../../core/config/documentation/dtos/created//created.category.item.dto';
+import { CategoryDto } from '../../../core/config/documentation/dtos/single-objects/category';
+import { CategoryItemDto } from '../../../core/config/documentation/dtos/single-objects/category.item';
 
 @Controller('categories')
 @ApiTags('Categories')
@@ -42,7 +45,7 @@ export class CategoryController {
   @ApiBody({ type: CreateCategoryDto })
   @ApiOperation({ summary: 'Create Category' })
   @ApiCreatedResponse({
-    description: 'Category created',
+    description: 'The Category has been successfully created. ',
     type: CreatedCategoryDto,
   })
   createCategory(
@@ -63,7 +66,7 @@ export class CategoryController {
   @ApiBody({ type: CreateCategoryItemDto })
   @ApiOperation({ summary: 'Create Category Item' })
   @ApiCreatedResponse({
-    description: 'Category Item Created',
+    description: 'The Category Item has been successfully created. ',
     type: CreatedCategoryItemDto,
   })
   createCategoryItem(
@@ -82,7 +85,7 @@ export class CategoryController {
 
   @Get()
   @ApiOperation({ summary: 'Get all categories' })
-  @ApiOkResponse({ description: 'Successfully', type: [Category] })
+  @ApiOkResponse({ description: 'Successfully', type: [CategoryDto] })
   findAllCategories(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -93,6 +96,8 @@ export class CategoryController {
   }
 
   @Get('items')
+  @ApiOperation({ summary: 'Get all category items' })
+  @ApiOkResponse({ description: 'Successfully', type: [CategoryItemDto] })
   findAllCategoryItems(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -103,6 +108,8 @@ export class CategoryController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get a category' })
+  @ApiOkResponse({ description: 'Successfully', type: CategoryDto })
   findOneCategory(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -114,6 +121,8 @@ export class CategoryController {
   }
 
   @Get('items/:id')
+  @ApiOperation({ summary: 'Get a category item' })
+  @ApiOkResponse({ description: 'Successfully', type: CategoryItemDto })
   findOneCategoryItem(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -127,6 +136,9 @@ export class CategoryController {
   }
 
   @Put(':id')
+  @ApiBody({ type: CategoryDto })
+  @ApiOperation({ summary: 'Update a category' })
+  @ApiOkResponse({ description: 'Successfully', type: CategoryDto })
   updateCategory(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -145,6 +157,9 @@ export class CategoryController {
   }
 
   @Put('items/:id')
+  @ApiBody({ type: CategoryItemDto })
+  @ApiOperation({ summary: 'Update a category item' })
+  @ApiOkResponse({ description: 'Successfully', type: CategoryItemDto })
   updateCategoryItem(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -163,6 +178,8 @@ export class CategoryController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete a category' })
+  @ApiNoContentResponse({ description: 'Category Deleted Successfully' })
   deleteCategory(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
@@ -176,6 +193,8 @@ export class CategoryController {
   }
 
   @Delete('items/:id')
+  @ApiOperation({ summary: 'Delete a category item' })
+  @ApiNoContentResponse({ description: 'Category Item Deleted Successfully' })
   deleteCategoryItem(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
