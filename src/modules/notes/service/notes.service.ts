@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Notes } from '../../../database/entities/notes.entity';
 import { CreateNoteDto } from '../dtos/create.note.dto';
 import { NotesRepository } from '../../../database/repositories/notes.repository';
+import { UUIDVersion } from 'class-validator';
 
 @Injectable()
 export class NotesService {
@@ -19,7 +20,7 @@ export class NotesService {
     return this.notesRepository.findAllNotes();
   }
 
-  async findOneNote(id: string): Promise<Notes> {
+  async findOneNote(id: UUIDVersion): Promise<Notes> {
     const note = await this.notesRepository.findOneNote(id);
     if (!note) {
       throw new NotFoundException(`Note with ID "${id}" not found`);
@@ -27,7 +28,10 @@ export class NotesService {
     return note;
   }
 
-  async updateNote(id: string, createNoteDto: CreateNoteDto): Promise<Notes> {
+  async updateNote(
+    id: UUIDVersion,
+    createNoteDto: CreateNoteDto,
+  ): Promise<Notes> {
     const note = await this.notesRepository.updateNote(id, createNoteDto);
     if (!note) {
       throw new NotFoundException(`Note with ID "${id}" not found`);
@@ -35,7 +39,7 @@ export class NotesService {
     return note;
   }
 
-  async deleteNote(id: string): Promise<void> {
+  async deleteNote(id: UUIDVersion): Promise<void> {
     const note = await this.notesRepository.deleteNote(id);
     if (!note) {
       throw new NotFoundException(`Note with ID "${id}" not found`);

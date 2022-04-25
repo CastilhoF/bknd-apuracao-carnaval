@@ -3,10 +3,11 @@ import { EventDto } from './event';
 import { SchoolDto } from './school';
 import { CategoryDto } from './category';
 import { JudgeDto } from './judge';
+import { UUIDVersion } from 'class-validator';
 
 export class NotesDto {
   @ApiProperty()
-  id: string;
+  id: UUIDVersion;
 
   @ApiProperty()
   event: EventDto;

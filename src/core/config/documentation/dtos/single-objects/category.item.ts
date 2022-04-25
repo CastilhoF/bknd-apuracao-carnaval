@@ -2,10 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { JudgeDto } from './judge';
 import { EventDto } from './event';
 import { CategoryDto } from './category';
+import { UUIDVersion } from 'class-validator';
 
 export class CategoryItemDto {
   @ApiProperty()
-  id: string;
+  id: UUIDVersion;
 
   @ApiProperty()
   category: CategoryDto;

@@ -28,6 +28,7 @@ import {
 } from '@nestjs/swagger';
 import { SchoolDto } from '../../../core/config/documentation/dtos/single-objects/school';
 import { CreatedSchoolDto } from '../../../core/config/documentation/dtos/created/created.school.dto';
+import { UUIDVersion } from 'class-validator';
 
 @Controller('schools')
 @ApiTags('Schools')
@@ -74,7 +75,7 @@ export class SchoolsController {
   @ApiOperation({ summary: 'Find School By ID' })
   @ApiOkResponse({ description: 'Successfully', type: SchoolDto })
   findOneSchools(
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @GetUser() user: User,
     @Res({ passthrough: true }) res: Response,
   ): Promise<Schools> {
@@ -89,7 +90,7 @@ export class SchoolsController {
   @ApiOkResponse({ description: 'Successfully', type: SchoolDto })
   updateSchools(
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @Body() createSchoolsDto: CreateSchoolsDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<Schools> {
@@ -104,7 +105,7 @@ export class SchoolsController {
     description: 'School Deleted Successfully',
   })
   deleteSchools(
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
   ): Promise<void> {

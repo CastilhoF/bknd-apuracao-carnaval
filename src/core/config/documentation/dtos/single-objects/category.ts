@@ -1,27 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { UUIDVersion } from 'class-validator';
 
 export class CategoryDto {
-  @ApiProperty({
-    description: 'Category ID',
-    example: '5f3b8f8f-f8f8-4f8f-8f8f-8f8f8f8f8f8f',
-  })
-  id: string;
+  @ApiProperty()
+  id: UUIDVersion;
 
-  @ApiProperty({
-    description: 'Category Name',
-    example: 'Bateria',
-  })
+  @ApiProperty()
   name: string;
 
-  @ApiProperty({
-    description: 'Created date',
-    example: '2020-08-20T00:00:00.000Z',
-  })
+  @ApiProperty()
   createdAt: Date;
 
-  @ApiProperty({
-    description: 'Updated date',
-    example: '2020-08-20T00:00:00.000Z',
-  })
+  @ApiProperty()
   updatedAt: Date;
 }

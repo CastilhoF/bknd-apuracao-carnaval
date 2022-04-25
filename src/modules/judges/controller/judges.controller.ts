@@ -28,6 +28,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { CreatedJudgeDto } from 'src/core/config/documentation/dtos/created/created.judge.dto';
+import { UUIDVersion } from 'class-validator';
 
 @Controller('judges')
 @ApiTags('Judges')
@@ -80,7 +81,7 @@ export class JudgesController {
     type: JudgeDto,
   })
   findOneJudges(
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @GetUser() user: User,
     @Res({ passthrough: true }) res: Response,
   ): Promise<Judges> {
@@ -99,7 +100,7 @@ export class JudgesController {
   updateJudges(
     @GetUser() user: User,
     @Res({ passthrough: true }) res: Response,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @Body() createJudgesDto: CreateJudgesDto,
   ): Promise<Judges> {
     this.logger.verbose(`User "${user.username}" update judge id: ${id}`);
@@ -114,7 +115,7 @@ export class JudgesController {
   })
   deleteJudges(
     @Res({ passthrough: true }) res: Response,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @GetUser() user: User,
   ): Promise<void> {
     this.logger.verbose(`User "${user.username}" delete judge id: ${id}`);

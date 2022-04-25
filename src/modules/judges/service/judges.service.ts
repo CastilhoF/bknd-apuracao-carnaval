@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Judges } from '../../../database/entities/judges.entity';
 import { CreateJudgesDto } from '../../../modules/judges/dtos/create.judges.dto';
 import { JudgesRepository } from '../../../database/repositories/judges.repository';
+import { UUIDVersion } from 'class-validator';
 
 @Injectable()
 export class JudgesService {
@@ -19,7 +20,7 @@ export class JudgesService {
     return this.judgesRepository.findAllJudges();
   }
 
-  async findOneJudges(id: string): Promise<Judges> {
+  async findOneJudges(id: UUIDVersion): Promise<Judges> {
     const found = await this.judgesRepository.findOneJudges(id);
     if (!found) {
       throw new NotFoundException(`Judges with ID "${id}" not found`);
@@ -28,13 +29,13 @@ export class JudgesService {
   }
 
   async updateJudges(
-    id: string,
+    id: UUIDVersion,
     createJudgesDto: CreateJudgesDto,
   ): Promise<Judges> {
     return this.judgesRepository.updateJudges(id, createJudgesDto);
   }
 
-  async deleteJudges(id: string): Promise<void> {
+  async deleteJudges(id: UUIDVersion): Promise<void> {
     const judges = await this.judgesRepository.findOneJudges(id);
     if (!judges) {
       throw new NotFoundException(`Judges with ID "${id}" not found`);

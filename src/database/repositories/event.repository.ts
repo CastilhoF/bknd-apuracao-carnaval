@@ -9,6 +9,8 @@ import {
 } from '@nestjs/common';
 import { FormatDateAndTime } from '../../utils/format.date';
 import { Logger } from '@nestjs/common';
+import { UUIDVersion } from 'class-validator';
+import { FinishingEventDto } from '../../modules/event/dtos/finishing.event.dto';
 
 @EntityRepository(Event)
 export class EventRepository extends Repository<Event> {
@@ -64,7 +66,7 @@ export class EventRepository extends Repository<Event> {
     return await this.find(findOneOptions);
   }
 
-  async findOneEvent(id: string): Promise<Event> {
+  async findOneEvent(id: UUIDVersion): Promise<Event> {
     try {
       const found = await this.findOne(id);
       if (!found) {
@@ -79,7 +81,7 @@ export class EventRepository extends Repository<Event> {
   }
 
   async updateEvent(
-    id: string,
+    id: UUIDVersion,
     createEventDto: CreateEventDto,
   ): Promise<Event> {
     const { name, city, year, champions, demotes, discard_min, discard_max } =
@@ -112,7 +114,28 @@ export class EventRepository extends Repository<Event> {
     }
   }
 
-  async deleteEvent(id: string): Promise<void> {
+  async finishingEvent(
+    id: UUIDVersion,
+    finishing: FinishingEventDto,
+  ): Promise<Event> {
+    const event = await this.findOne(id);
+
+    if (!event) {
+      this.logger.error(`Event id "${id}" not found.`);
+      throw new BadRequestException(`Event with ID "${id}" not found`);
+    }
+
+    event.finished = finishing.finished;
+    event.winner = finishing.winner;
+
+    try {
+      return await this.save(event);
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
+
+  async deleteEvent(id: UUIDVersion): Promise<void> {
     const event = await this.findOne(id);
 
     if (!event) {

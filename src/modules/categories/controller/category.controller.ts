@@ -32,6 +32,7 @@ import {
 import { CreatedCategoryItemDto } from '../../../core/config/documentation/dtos/created//created.category.item.dto';
 import { CategoryDto } from '../../../core/config/documentation/dtos/single-objects/category';
 import { CategoryItemDto } from '../../../core/config/documentation/dtos/single-objects/category.item';
+import { UUIDVersion } from 'class-validator';
 
 @Controller('categories')
 @ApiTags('Categories')
@@ -113,7 +114,7 @@ export class CategoryController {
   findOneCategory(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
   ): Promise<Category> {
     this.logger.verbose(`User "${user.username}" find a category: ID - ${id}.`);
     res.status(HttpStatus.OK);
@@ -126,7 +127,7 @@ export class CategoryController {
   findOneCategoryItem(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
   ): Promise<CategoryItem> {
     this.logger.verbose(
       `User "${user.username}" find a category item: ID - ${id}.`,
@@ -142,7 +143,7 @@ export class CategoryController {
   updateCategory(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @Body() createCategoryDto: CreateCategoryDto,
   ): Promise<Category> {
     this.logger.verbose(
@@ -163,7 +164,7 @@ export class CategoryController {
   updateCategoryItem(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @Body() createCategoryItemDto: CreateCategoryItemDto,
   ): Promise<CategoryItem> {
     this.logger.verbose(
@@ -183,7 +184,7 @@ export class CategoryController {
   deleteCategory(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
   ): Promise<void> {
     this.logger.verbose(
       `User "${user.username}" deleting a category: ID - ${id}.`,
@@ -198,7 +199,7 @@ export class CategoryController {
   deleteCategoryItem(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
   ): Promise<void> {
     this.logger.verbose(
       `User "${user.username}" deleting a category item: ID - ${id}.`,

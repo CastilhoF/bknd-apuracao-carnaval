@@ -1,10 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { UUIDVersion } from 'class-validator';
 import { Category } from '../../../../../database/entities/category.entity';
 import { Judges } from '../../../../../database/entities/judges.entity';
 
 export class CreatedCategoryItemDto {
   @ApiProperty()
-  id: string;
+  id: UUIDVersion;
 
   @ApiProperty()
   createdAt: Date;

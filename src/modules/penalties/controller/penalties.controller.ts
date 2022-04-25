@@ -28,6 +28,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { CreatedPenaltyDto } from '../../../core/config/documentation/dtos/created/created.penalty.dto';
+import { UUIDVersion } from 'class-validator';
 
 @Controller('penalties')
 @ApiTags('Penalties')
@@ -84,7 +85,7 @@ export class PenaltiesController {
   findOnePenalties(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
   ): Promise<Penalties> {
     this.logger.verbose(`User "${user.username}" get penalty "${id}".`);
     res.status(HttpStatus.OK);
@@ -100,7 +101,7 @@ export class PenaltiesController {
   updatePenalties(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @Body() createPenaltiesDto: CreatePenaltiesDto,
   ): Promise<Penalties> {
     this.logger.verbose(`User "${user.username}" update penalty id: "${id}".`);
@@ -114,7 +115,7 @@ export class PenaltiesController {
   deletePenalties(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
   ): Promise<void> {
     this.logger.verbose(`User "${user.username}" deleting penalties "${id}".`);
     res.status(HttpStatus.NO_CONTENT);
