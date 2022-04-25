@@ -12,7 +12,7 @@ export class Event {
   id: UUIDVersion;
 
   @ApiProperty()
-  @Column({ unique: true })
+  @Column()
   name: string;
 
   @ApiProperty()
