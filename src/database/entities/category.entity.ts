@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { UUIDVersion } from 'class-validator';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { CategoryItem } from './category.item.entity';
 
@@ -6,7 +7,7 @@ import { CategoryItem } from './category.item.entity';
 export class Category {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: UUIDVersion;
 
   @ApiProperty()
   @Column({ unique: true })

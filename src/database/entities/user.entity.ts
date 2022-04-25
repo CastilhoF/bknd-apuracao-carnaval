@@ -1,11 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { UUIDVersion } from 'class-validator';
 
 @Entity()
 export class User {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: UUIDVersion;
 
   @ApiProperty()
   @Column({ unique: true })

@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Penalties } from '../../../database/entities/penalties.entity';
 import { CreatePenaltiesDto } from '../../../modules/penalties/dtos/create.penalties.dto';
 import { PenaltiesRepository } from '../../../database/repositories/penalties.repository';
+import { UUIDVersion } from 'class-validator';
 
 @Injectable()
 export class PenaltiesService {
@@ -21,12 +22,12 @@ export class PenaltiesService {
     return this.penaltiesRepository.findAllPenalties();
   }
 
-  async findOnePenalties(id: string): Promise<Penalties> {
+  async findOnePenalties(id: UUIDVersion): Promise<Penalties> {
     return await this.penaltiesRepository.findPenaltiesById(id);
   }
 
   async updatePenalties(
-    id: string,
+    id: UUIDVersion,
     createPenaltiesDto: CreatePenaltiesDto,
   ): Promise<Penalties> {
     return await this.penaltiesRepository.updatePenalties(
@@ -35,7 +36,7 @@ export class PenaltiesService {
     );
   }
 
-  async deletePenalties(id: string): Promise<void> {
+  async deletePenalties(id: UUIDVersion): Promise<void> {
     return this.penaltiesRepository.deletePenalties(id);
   }
 }

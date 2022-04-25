@@ -10,12 +10,13 @@ import { Category } from './category.entity';
 import { Event } from './event.entity';
 import { Judges } from './judges.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { UUIDVersion } from 'class-validator';
 
 @Entity()
 export class CategoryItem {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: UUIDVersion;
 
   @ApiProperty()
   @ManyToOne((_type) => Category, (category) => category.id, { eager: true })

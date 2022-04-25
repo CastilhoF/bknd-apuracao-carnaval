@@ -28,6 +28,7 @@ import {
 import { CreateNoteDto } from '../dtos/create.note.dto';
 import { NotesDto } from '../../../core/config/documentation/dtos/single-objects/notes';
 import { CreatedNoteDto } from '../../../core/config/documentation/dtos/created/created.notes.dto';
+import { UUIDVersion } from 'class-validator';
 
 @Controller('notes')
 @ApiTags('Notes')
@@ -80,7 +81,7 @@ export class NotesController {
     type: NotesDto,
   })
   async findOneNote(
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @GetUser() user: User,
     @Res({ passthrough: true }) res: Response,
   ): Promise<Notes> {
@@ -99,7 +100,7 @@ export class NotesController {
     type: NotesDto,
   })
   async updateNote(
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @Body() createNoteDto: Notes,
     @GetUser() user: User,
     @Res({ passthrough: true }) res: Response,
@@ -117,7 +118,7 @@ export class NotesController {
   @ApiOperation({ summary: 'Delete a note by id' })
   @ApiNoContentResponse({ description: 'Note deleted successfully' })
   async deleteNote(
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @GetUser() user: User,
     @Res({ passthrough: true }) res: Response,
   ): Promise<void> {

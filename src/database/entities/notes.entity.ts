@@ -4,18 +4,21 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { Event } from './event.entity';
 import { Judges } from './judges.entity';
 import { Schools } from './schools.entity';
 import { Category } from './category.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { UUIDVersion } from 'class-validator';
 
 @Entity()
+@Unique(['event', 'judge', 'school', 'category'])
 export class Notes {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: UUIDVersion;
 
   @ApiProperty()
   @JoinColumn({ name: 'judge_id' })

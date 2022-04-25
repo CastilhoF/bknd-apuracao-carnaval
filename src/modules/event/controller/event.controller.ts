@@ -9,6 +9,7 @@ import {
   Res,
   Put,
   UseGuards,
+  Patch,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../user/decorators/get.user.decorator';
@@ -28,6 +29,8 @@ import {
 } from '@nestjs/swagger';
 import { CreatedEventDto } from '../../../core/config/documentation/dtos/created/created.event.dto';
 import { EventDto } from '../../../core/config/documentation/dtos/single-objects/event';
+import { UUIDVersion } from 'class-validator';
+import { FinishingEventDto } from '../dtos/finishing.event.dto';
 
 @Controller('events')
 @ApiTags('Events')
@@ -78,7 +81,7 @@ export class EventController {
   @ApiOkResponse({ description: 'Successfully', type: EventDto })
   findOneEvent(
     @Res({ passthrough: true }) res: Response,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     // @GetUser() user: User,
   ): Promise<Event> {
     // this.logger.verbose(`User "${user.username}" find one event id: ${id}`);
@@ -106,7 +109,7 @@ export class EventController {
   @ApiOkResponse({ description: 'Successfully', type: EventDto })
   findOneEventDelivery(
     @Res({ passthrough: true }) res: Response,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     // @GetUser() user: User,
   ): Promise<Event> {
     // this.logger.verbose(`User "${user.username}" find one event id: ${id}`);
@@ -121,12 +124,27 @@ export class EventController {
   updateEvent(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
     @Body() createEventDto: CreateEventDto,
   ): Promise<Event> {
     this.logger.verbose(`User "${user.username}" update event id: ${id}`);
     res.status(HttpStatus.OK);
     return this.eventService.updateEvent(id, createEventDto);
+  }
+
+  @Patch(':id')
+  @ApiOperation({ summary: 'Mark event as finished' })
+  @ApiOkResponse({ description: 'Event finished successfully' })
+  @UseGuards(AuthGuard())
+  finishingEvent(
+    @Res({ passthrough: true }) res: Response,
+    @GetUser() user: User,
+    @Param('id') id: UUIDVersion,
+    @Body() finishingEvent: FinishingEventDto,
+  ): Promise<Event> {
+    this.logger.verbose(`User "${user.username}" delete event id: ${id}`);
+    res.status(HttpStatus.OK);
+    return this.eventService.finishEvent(id, finishingEvent);
   }
 
   @Delete(':id')
@@ -136,7 +154,7 @@ export class EventController {
   deleteEvent(
     @Res({ passthrough: true }) res: Response,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('id') id: UUIDVersion,
   ): Promise<void> {
     this.logger.verbose(`User "${user.username}" delete event id: ${id}`);
     res.status(HttpStatus.NO_CONTENT);

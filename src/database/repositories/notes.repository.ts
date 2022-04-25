@@ -16,15 +16,24 @@ import { FormatDateAndTime } from '../../utils/format.date';
 import { Logger } from '@nestjs/common';
 import { Event } from '../entities/event.entity';
 import { Schools } from '../entities/schools.entity';
+import { Judges } from '../entities/judges.entity';
+import { Category } from '../entities/category.entity';
+import { UUIDVersion } from 'class-validator';
 
 @EntityRepository(Notes)
 export class NotesRepository extends Repository<Notes> {
   private logger = new Logger('NotesRepository');
   private eventRepository: Repository<Event>;
+  private judgesRepository: Repository<Judges>;
+  private schoolsRepository: Repository<Schools>;
+  private categoryRepository: Repository<Category>;
 
   constructor(private connection: Connection) {
     super();
     this.eventRepository = connection.getRepository<Event>(Event);
+    this.judgesRepository = connection.getRepository<Judges>(Judges);
+    this.schoolsRepository = connection.getRepository<Schools>(Schools);
+    this.categoryRepository = connection.getRepository<Category>(Category);
   }
 
   async createNote(createNoteDto: CreateNoteDto): Promise<Notes> {
@@ -37,19 +46,49 @@ export class NotesRepository extends Repository<Notes> {
     const updatedAt = FormatDateAndTime(date);
 
     if (!judge) {
+      this.logger.error(`Judge id "${judge}" is empty.`);
       throw new BadRequestException('Judge are required');
+    } else {
+      const judgeIsValid = await this.judgesRepository.findOne(judge.id);
+      if (!judgeIsValid) {
+        this.logger.error(`Judge id "${judge}" is not valid.`);
+        throw new BadRequestException('Judge ID is not valid or not found.');
+      }
     }
 
     if (!school) {
+      this.logger.error(`School id "${school}" is empty.`);
       throw new BadRequestException('School are required');
+    } else {
+      const schoolIsValid = await this.schoolsRepository.findOne(school.id);
+      if (!schoolIsValid) {
+        this.logger.error(`School id "${school}" is not valid.`);
+        throw new BadRequestException('School ID is not valid or not found.');
+      }
     }
 
     if (!category) {
+      this.logger.error(`Category id "${category}" is empty.`);
       throw new BadRequestException('Category are required');
+    } else {
+      const categoryIsValid = await this.categoryRepository.findOne(
+        category.id,
+      );
+      if (!categoryIsValid) {
+        this.logger.error(`Category id "${category}" is not valid.`);
+        throw new BadRequestException('Category ID is not valid or not found.');
+      }
     }
 
     if (!event) {
+      this.logger.error(`Event id "${event}" is empty.`);
       throw new BadRequestException('Event are required');
+    } else {
+      const eventIsValid = await this.eventRepository.findOne(event.id);
+      if (!eventIsValid) {
+        this.logger.error(`Event id "${event}" is not valid.`);
+        throw new BadRequestException('Event ID is not valid or not found.');
+      }
     }
 
     if (!value) {
@@ -70,7 +109,10 @@ export class NotesRepository extends Repository<Notes> {
       return await this.save(note);
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') {
-        throw new ConflictException('Judges name already exists');
+        throw new ConflictException({
+          message:
+            'This judge has already noted a score for this category in this event.',
+        });
       } else {
         throw new InternalServerErrorException();
       }
@@ -84,7 +126,7 @@ export class NotesRepository extends Repository<Notes> {
     return await this.find(findOptions);
   }
 
-  async findOneNote(id: string): Promise<Notes> {
+  async findOneNote(id: UUIDVersion): Promise<Notes> {
     try {
       const findOptions = {
         relations: ['judge', 'school', 'category'],
@@ -102,7 +144,10 @@ export class NotesRepository extends Repository<Notes> {
     }
   }
 
-  async updateNote(id: string, createNoteDto: CreateNoteDto): Promise<Notes> {
+  async updateNote(
+    id: UUIDVersion,
+    createNoteDto: CreateNoteDto,
+  ): Promise<Notes> {
     const { judge, school, category, event, value } = createNoteDto;
 
     const date = new Date();
@@ -135,7 +180,7 @@ export class NotesRepository extends Repository<Notes> {
     }
   }
 
-  async deleteNote(id: string): Promise<Notes> {
+  async deleteNote(id: UUIDVersion): Promise<Notes> {
     const note = await this.findOne(id);
 
     if (!note) {

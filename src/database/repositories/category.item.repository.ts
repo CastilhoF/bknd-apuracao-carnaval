@@ -17,6 +17,7 @@ import { Logger } from '@nestjs/common';
 import { Category } from '../entities/category.entity';
 import { Judges } from '../entities/judges.entity';
 import { Event } from '../entities/event.entity';
+import { UUIDVersion } from 'class-validator';
 
 @EntityRepository(CategoryItem)
 export class CategoryItemRepository extends Repository<CategoryItem> {
@@ -88,7 +89,7 @@ export class CategoryItemRepository extends Repository<CategoryItem> {
     return await this.find(findOneOptions);
   }
 
-  async findOneCategoryItem(id: string): Promise<CategoryItem> {
+  async findOneCategoryItem(id: UUIDVersion): Promise<CategoryItem> {
     try {
       const found = await this.findOne(id);
       if (!found) {
@@ -102,7 +103,7 @@ export class CategoryItemRepository extends Repository<CategoryItem> {
   }
 
   async updateCategoryItem(
-    id: string,
+    id: UUIDVersion,
     createCategoryItemDto: CreateCategoryItemDto,
   ): Promise<CategoryItem> {
     const { category, judges, event } = createCategoryItemDto;
@@ -128,7 +129,7 @@ export class CategoryItemRepository extends Repository<CategoryItem> {
     }
   }
 
-  async deleteCategoryItem(id: string): Promise<void> {
+  async deleteCategoryItem(id: UUIDVersion): Promise<void> {
     const result = await this.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`CategoryItem with ID "${id}" not found`);

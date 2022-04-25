@@ -9,7 +9,7 @@
     <p align="center">
 
 
-  <a href="https://twitter.com/iG" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+  <a href="https://twitter.com/iG" target="_blank"><img src="https://img.shields.io/twitter/follow/iG?style=social&label=Follow"></a>
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->

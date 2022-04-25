@@ -10,6 +10,7 @@ import { CreateCategoryDto } from '../dtos/create.category.dto';
 import { CreateCategoryItemDto } from '../dtos/create.category.items.dto';
 import { CategoryRepository } from '../../../database/repositories/category.repository';
 import { CategoryItemRepository } from '../../../database/repositories/category.item.repository';
+import { UUIDVersion } from 'class-validator';
 
 @Injectable()
 export class CategoryService {
@@ -42,7 +43,7 @@ export class CategoryService {
     return this.categoryItemRepository.findAllCategoryItems();
   }
 
-  async findOneCategory(id: string): Promise<Category> {
+  async findOneCategory(id: UUIDVersion): Promise<Category> {
     const category = await this.categoryRepository.findOneCategory(id);
     if (!category) {
       throw new BadRequestException(`Category with ID "${id}" not found`);
@@ -50,25 +51,25 @@ export class CategoryService {
     return category;
   }
 
-  async findOneCategoryItem(id: string): Promise<CategoryItem> {
+  async findOneCategoryItem(id: UUIDVersion): Promise<CategoryItem> {
     const categoryItem = await this.categoryItemRepository.findOneCategoryItem(
       id,
     );
-    if (!categoryItem) {
-      throw new NotFoundException(`Category Item with ID "${id}" not found`);
-    }
     return categoryItem;
   }
 
   async updateCategory(
-    id: string,
+    id: UUIDVersion,
     createCategoryDto: CreateCategoryDto,
   ): Promise<Category> {
+    if (!id) {
+      throw new BadRequestException('Category id is required');
+    }
     return this.categoryRepository.updateCategory(id, createCategoryDto);
   }
 
   async updateCategoryItem(
-    id: string,
+    id: UUIDVersion,
     createCategoryItemDto: CreateCategoryItemDto,
   ): Promise<CategoryItem> {
     return this.categoryItemRepository.updateCategoryItem(
@@ -77,11 +78,11 @@ export class CategoryService {
     );
   }
 
-  async deleteCategory(id: string): Promise<void> {
+  async deleteCategory(id: UUIDVersion): Promise<void> {
     return this.categoryRepository.deleteCategory(id);
   }
 
-  async deleteCategoryItem(id: string): Promise<void> {
+  async deleteCategoryItem(id: UUIDVersion): Promise<void> {
     return this.categoryItemRepository.deleteCategoryItem(id);
   }
 }

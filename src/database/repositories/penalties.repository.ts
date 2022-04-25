@@ -11,6 +11,7 @@ import { FormatDateAndTime } from '../../utils/format.date';
 import { Logger } from '@nestjs/common';
 import { Schools } from '../entities/schools.entity';
 import { Event } from '../entities/event.entity';
+import { UUIDVersion } from 'class-validator';
 
 @EntityRepository(Penalties)
 export class PenaltiesRepository extends Repository<Penalties> {
@@ -72,7 +73,7 @@ export class PenaltiesRepository extends Repository<Penalties> {
     return await this.find();
   }
 
-  async findPenaltiesById(id: string): Promise<Penalties> {
+  async findPenaltiesById(id: UUIDVersion): Promise<Penalties> {
     const found = await this.findOne(id);
     if (!found) {
       this.logger.error(`Penalty id "${id}" not found.`);
@@ -82,7 +83,7 @@ export class PenaltiesRepository extends Repository<Penalties> {
   }
 
   async updatePenalties(
-    id: string,
+    id: UUIDVersion,
     createPenaltiesDto: CreatePenaltiesDto,
   ): Promise<Penalties> {
     const { school, value } = createPenaltiesDto;
@@ -115,7 +116,7 @@ export class PenaltiesRepository extends Repository<Penalties> {
     }
   }
 
-  async deletePenalties(id: string): Promise<void> {
+  async deletePenalties(id: UUIDVersion): Promise<void> {
     const result = await this.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException('Penalty not found');

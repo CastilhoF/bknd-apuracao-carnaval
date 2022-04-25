@@ -3,15 +3,16 @@ import { Penalties } from './penalties.entity';
 import { CategoryItem } from './category.item.entity';
 import { Notes } from './notes.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { UUIDVersion } from 'class-validator';
 
 @Entity()
 export class Event {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: UUIDVersion;
 
   @ApiProperty()
-  @Column()
+  @Column({ unique: true })
   name: string;
 
   @ApiProperty()
@@ -37,6 +38,14 @@ export class Event {
   @ApiProperty()
   @Column()
   discard_max: boolean;
+
+  @ApiProperty()
+  @Column()
+  finished: boolean;
+
+  @ApiProperty()
+  @Column()
+  winner: string;
 
   @ApiProperty()
   @OneToMany((_type) => CategoryItem, (categoryItem) => categoryItem.event, {

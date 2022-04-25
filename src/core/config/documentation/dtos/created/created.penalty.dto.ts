@@ -1,10 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { UUIDVersion } from 'class-validator';
 import { EventDto } from '../single-objects/event';
 import { SchoolDto } from '../single-objects/school';
 
 export class CreatedPenaltyDto {
   @ApiProperty()
-  id: string;
+  id: UUIDVersion;
 
   @ApiProperty()
   value: string;
