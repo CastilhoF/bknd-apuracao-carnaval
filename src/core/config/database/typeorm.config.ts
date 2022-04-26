@@ -19,4 +19,4 @@ export const TypeOrmConfig: TypeOrmModuleAsyncOptions = {
   },
 };
 
-// pra pegar
+// pra pega
