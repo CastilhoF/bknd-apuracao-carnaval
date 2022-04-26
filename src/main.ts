@@ -12,20 +12,16 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalInterceptors(new TransformInterceptor());
 
   const config = swaggerConfig;
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('documentation', app, document);
+  SwaggerModule.setup('api', app, document);
 
   const configService: ConfigService = new ConfigService();
 
-  app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalInterceptors(new TransformInterceptor());
   await app.listen(configService.get('PORT'), configService.get('HOST'));
-  logger.log(
-    `Application listening on port: ${configService.get(
-      'PORT',
-    )} and host: ${configService.get('HOST')}`,
-  );
+  logger.log(`Application listening on: ${await app.getUrl()}`);
 }
 bootstrap();

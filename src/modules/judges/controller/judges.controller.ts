@@ -24,12 +24,14 @@ import {
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
+  ApiBearerAuth,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { CreatedJudgeDto } from 'src/core/config/documentation/dtos/created/created.judge.dto';
 import { UUIDVersion } from 'class-validator';
 
+@ApiBearerAuth()
 @Controller('judges')
 @ApiTags('Judges')
 @UseGuards(AuthGuard())

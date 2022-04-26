@@ -25,6 +25,7 @@ import {
   ApiNoContentResponse,
   ApiOkResponse,
   ApiOperation,
+  ApiBearerAuth,
   ApiTags,
 } from '@nestjs/swagger';
 import { CreatedEventDto } from '../../../core/config/documentation/dtos/created/created.event.dto';
@@ -32,6 +33,7 @@ import { EventDto } from '../../../core/config/documentation/dtos/single-objects
 import { UUIDVersion } from 'class-validator';
 import { FinishingEventDto } from '../dtos/finishing.event.dto';
 
+@ApiBearerAuth()
 @Controller('events')
 @ApiTags('Events')
 export class EventController {
