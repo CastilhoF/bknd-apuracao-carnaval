@@ -64,9 +64,11 @@ $ docker-compose up --build -d
 https://service.ig.com.br/apuracao-carnaval-bknd/
 ```
 
-## Deploy
+## Routes Documentation
 
-<br>
+- Documentation of routes via swagger: - [Documentation](https://service.ig.com.br/apuracao-carnaval-bknd/api/)
+
+## Deploy
 
 Access the Balder server via ssh terminal:
 
