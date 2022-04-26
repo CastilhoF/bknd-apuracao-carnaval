@@ -142,7 +142,9 @@ export class EventController {
     @Param('id') id: UUIDVersion,
     @Body() finishingEvent: FinishingEventDto,
   ): Promise<Event> {
-    this.logger.verbose(`User "${user.username}" delete event id: ${id}`);
+    this.logger.verbose(
+      `User "${user.username}" update event id: ${id} - Event Winner: ${finishingEvent.winner}`,
+    );
     res.status(HttpStatus.OK);
     return this.eventService.finishEvent(id, finishingEvent);
   }
