@@ -22,6 +22,7 @@ import {
   ApiBody,
   ApiCreatedResponse,
   ApiNoContentResponse,
+  ApiBearerAuth,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -30,6 +31,7 @@ import { SchoolDto } from '../../../core/config/documentation/dtos/single-object
 import { CreatedSchoolDto } from '../../../core/config/documentation/dtos/created/created.school.dto';
 import { UUIDVersion } from 'class-validator';
 
+@ApiBearerAuth()
 @Controller('schools')
 @ApiTags('Schools')
 @UseGuards(AuthGuard())

@@ -22,6 +22,7 @@ import { Logger } from '@nestjs/common';
 import { CategoryService } from '../services/category.service';
 import { Response } from 'express';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiNoContentResponse,
@@ -34,6 +35,7 @@ import { CategoryDto } from '../../../core/config/documentation/dtos/single-obje
 import { CategoryItemDto } from '../../../core/config/documentation/dtos/single-objects/category.item';
 import { UUIDVersion } from 'class-validator';
 
+@ApiBearerAuth()
 @Controller('categories')
 @ApiTags('Categories')
 @UseGuards(AuthGuard())

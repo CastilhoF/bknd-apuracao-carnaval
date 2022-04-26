@@ -22,6 +22,7 @@ import {
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
+  ApiBearerAuth,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
@@ -30,6 +31,7 @@ import { NotesDto } from '../../../core/config/documentation/dtos/single-objects
 import { CreatedNoteDto } from '../../../core/config/documentation/dtos/created/created.notes.dto';
 import { UUIDVersion } from 'class-validator';
 
+@ApiBearerAuth()
 @Controller('notes')
 @ApiTags('Notes')
 @UseGuards(AuthGuard())

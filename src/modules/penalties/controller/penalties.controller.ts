@@ -23,6 +23,7 @@ import {
   ApiBody,
   ApiCreatedResponse,
   ApiNoContentResponse,
+  ApiBearerAuth,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -30,6 +31,7 @@ import {
 import { CreatedPenaltyDto } from '../../../core/config/documentation/dtos/created/created.penalty.dto';
 import { UUIDVersion } from 'class-validator';
 
+@ApiBearerAuth()
 @Controller('penalties')
 @ApiTags('Penalties')
 @UseGuards(AuthGuard())

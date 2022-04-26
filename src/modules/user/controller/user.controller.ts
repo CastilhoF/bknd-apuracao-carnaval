@@ -6,11 +6,13 @@ import {
   ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
+  ApiBearerAuth,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { UserSignInResponseDto } from '../../../core/config/documentation/dtos/loggin/user.signin.dto';
 
+@ApiBearerAuth()
 @Controller('user')
 @ApiTags('User')
 export class UserController {
