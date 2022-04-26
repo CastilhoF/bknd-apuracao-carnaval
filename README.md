@@ -66,7 +66,15 @@ https://service.ig.com.br/apuracao-carnaval-bknd/
 
 ## Routes Documentation
 
-- Documentation of routes via swagger: - [Documentation](https://service.ig.com.br/apuracao-carnaval-bknd/api/)
+<br>
+
+- Documentation of routes via swagger: - [Documentation]()
+
+<br>
+
+<a href="https://service.ig.com.br/apuracao-carnaval-bknd/api/" target="_blank"><img  width="320" src=https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg></a>
+
+<br>
 
 ## Deploy
 
