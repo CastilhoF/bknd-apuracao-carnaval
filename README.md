@@ -1,22 +1,22 @@
 <p align="center">
-  <a href="https://www.ig.com.br" target="blank"><img src="https://i0.statig.com.br/sass-canais/ig/images/home/logo_iguinho_home.png" width="120" alt="Portal iG Logo" /></a>
+  <a href="https://github.com/Hone-Code" target="blank"><img src="https://i.imgur.com/ISZEmfG.png" width="720" alt="Honey Code Logo" /></a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center"><a href="https://www.ig.com.br" target="_blank">Portal iG</a> is one of the largest news and content portals in the country. It was a pioneer in the democratization of the internet and currently has more than 39 million unique monthly visitors.</p>
+  <p align="center"><a href="https://github.com/Hone-Code" target="_blank">Honey Code</a> is an organization created in 2022 focused on developing on-demand software. Here we make it happen. As we always say: growth, development and coffe forever</p>
     <p align="center">
 
 
-  <a href="https://twitter.com/iG" target="_blank"><img src="https://img.shields.io/twitter/follow/iG?style=social&label=Follow"></a>
+  <a href="https://twitter.com/CastilhoWylde" target="_blank"><img src="https://img.shields.io/twitter/follow/CastilhoWylde?style=social&label=Follow"></a>
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Backend Carnival Clearance](https://github.com/Portal-iG/o-dia-backend-apuracao-carnaval) backend api carnival calculation repository - Portal iG and O Dia.
+[Backend Carnival Clearance](https://github.com/Portal-iG/o-dia-backend-apuracao-carnaval) backend api carnival calculation repository.
 
 ## Installation
 
@@ -56,13 +56,13 @@ $ yarn test:cov
 # Build docker whith docker-compose
 $ docker-compose up --build -d
 ```
-
+<!-- 
 ## Host Production
 
 - Server - [Balder](https://service.ig.com.br/apuracao-carnaval-bknd/)
 ```bash
 https://service.ig.com.br/apuracao-carnaval-bknd/
-```
+``` -->
 
 ## Routes Documentation
 
@@ -76,7 +76,7 @@ https://service.ig.com.br/apuracao-carnaval-bknd/
 
 <br>
 
-## Deploy
+<!-- ## Deploy
 
 Access the Balder server via ssh terminal:
 
@@ -110,7 +110,7 @@ Build docker via docker compose command:
 ```bash
 # Docker Compose Command
 $ docker-compose -up --build -d
-```
+``` -->
 
 
 ## Stay in touch
