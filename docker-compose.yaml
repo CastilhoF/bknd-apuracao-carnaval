@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   api:
-    container_name: o-dia-backend-apuracao-carnaval
+    container_name: backend-apuracao-carnaval
     build:
       context: .
       dockerfile: Dockerfile

@@ -56,13 +56,13 @@ $ yarn test:cov
 # Build docker whith docker-compose
 $ docker-compose up --build -d
 ```
-<!-- 
+
 ## Host Production
 
-- Server - [Balder](https://service.ig.com.br/apuracao-carnaval-bknd/)
+- Server - [Balder](https://bknd-carnival-clearance.herokuapp.com/)
 ```bash
-https://service.ig.com.br/apuracao-carnaval-bknd/
-``` -->
+https://bknd-carnival-clearance.herokuapp.com/
+```
 
 ## Routes Documentation
 
@@ -72,45 +72,49 @@ https://service.ig.com.br/apuracao-carnaval-bknd/
 
 <br>
 
-<a href="https://service.ig.com.br/apuracao-carnaval-bknd/api/" target="_blank"><img  width="320" src=https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg></a>
+<a href="https://bknd-carnival-clearance.herokuapp.com/api/" target="_blank"><img  width="320" src=https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg></a>
 
 <br>
 
-<!-- ## Deploy
+## Deploy on Heroku Container With Heroku CLI
 
-Access the Balder server via ssh terminal:
+First you will need to build the api in local docker, that is, on your computer.
 
 ```bash
-# Balder ssh access
-$ ssh -i ~/.ssh/chave_ig.pem ubuntu@10.0.35.122
+# Build docker whith docker-compose
+$ docker-compose up --build -d
 ```
 
 <br>
 
-Enter the folder where the app is located:
+Now follow the steps via heroku cli
 
 ```bash
-# Command to enter the project folder inside the server
-$ cd /deploy/VAR/dominios/o-dia-backend-apuracao-carnaval/ 
+# If you haven't already, log in to your Heroku account and follow the prompts to create a new SSH public key.
+$ heroku login
+```
+Log in to Container Registry
+
+```bash
+# You must have Docker set up locally to continue. You should see output when you run this command.
+$ docker ps
+
+# Now you can sign into Container Registry.
+$ heroku container:login
+```
+Push your Docker-based app
+```bash
+# Build the Dockerfile in the current directory and push the Docker image.
+$ heroku container:push web -a "app-name-on-heroku"
+```
+
+Deploy the changes
+```bash
+# Release the newly pushed images to deploy your app.
+$ heroku container:release web -a "app-name-on-heroku"
 ```
 
 <br>
-
-Run the git pull on the main branch:
-
-```bash
-# Pull in the repository
-$ git pull origin main
-```
-
-<br>
-
-Build docker via docker compose command:
-
-```bash
-# Docker Compose Command
-$ docker-compose -up --build -d
-``` -->
 
 
 ## Stay in touch
