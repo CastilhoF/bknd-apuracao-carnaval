@@ -116,7 +116,6 @@ $ docker-compose -up --build -d
 ## Stay in touch
 
 - Author - [Fernando Castilho](https://github.com/CastilhoF)
-- Author - [William Mendes](https://github.com/WillianMendes)
-- Website - [https://www.ig.com.br](https://www.ig.com.br)
-- Twitter - [@iG](https://twitter.com/iG)
+- Linkedin - [Dev Castilho](https://www.linkedin.com/in/fernando-castilho/)
+- Twitter - [@Castilho](https://twitter.com/CastilhoWylde)
 
