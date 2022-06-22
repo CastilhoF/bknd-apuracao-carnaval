@@ -114,7 +114,13 @@ Deploy the changes
 $ heroku container:release web -a "app-name-on-heroku"
 ```
 
+To visualization logs 
+```bash
+$ heroku logs --tail -a "app-name-on-heroku"
+
 <br>
+
+
 
 
 ## Stay in touch
