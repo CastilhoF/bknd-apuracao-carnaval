@@ -114,9 +114,18 @@ Deploy the changes
 $ heroku container:release web -a "app-name-on-heroku"
 ```
 
-To visualization logs 
+## Utils
+
+<br>
+
 ```bash
+# View heroku container logs
 $ heroku logs --tail -a "app-name-on-heroku"
+
+# To restart Container in Heroku:
+$ heroku ps:restart web -a "app-name-on-heroku"
+```
+
 
 <br>
 
